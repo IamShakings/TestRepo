@@ -57,6 +57,36 @@ class HPAMismatchParams(EventEnricherParams):
     # allowed a way to disable this finding for users who have custom setup
     check_for_metrics_server: bool = True
 
+class ScaleHPAParams(ActionParams):
+    """
+    :var max_replicas: New max_replicas to set this HPA to.
+    """
+
+    max_replicas: int
+
+
+@action
+def scale_hpa_callback_2(event: HorizontalPodAutoscalerEvent, params: ScaleHPAParams):
+    """
+    Update the max_replicas of this HPA to the specified value.
+
+    Usually used as a callback action, when the HPA reaches the max_replicas limit.
+    """
+    hpa = event.get_horizontalpodautoscaler()
+    if not hpa:
+        logging.info(f"scale_hpa_callback - no hpa on event: {event}")
+        return
+
+    hpa.spec.maxReplicas = params.max_replicas
+    hpa.replaceNamespacedHorizontalPodAutoscaler(hpa.metadata.name, hpa.metadata.namespace)
+    finding = Finding(
+        title=f"Max replicas for HPA *{hpa.metadata.name}* "
+        f"in namespace *{hpa.metadata.namespace}* updated to: *{params.max_replicas}*",
+        severity=FindingSeverity.INFO,
+        source=FindingSource.PROMETHEUS,
+        aggregation_key="scale_hpa_callback",
+    )
+    event.add_finding(finding)
 
 
 @action
@@ -76,7 +106,7 @@ def alert_on_hpa_reached_limit_2(event: HorizontalPodAutoscalerChangeEvent, acti
     avg_cpu = int(hpa.status.currentCPUUtilizationPercentage)
     new_max_replicas_suggestion = ceil((action_params.increase_pct + 100) * hpa.spec.maxReplicas / 100)
     choices = {
-        f"Update HPA max replicas to: {new_max_replicas_suggestion}": CallbackChoice(
+        f"Update HPA max replicas to: {new_max_replicas_suggestion}"(
             action=scale_hpa_callback,
             action_params=ScaleHPAParams(
                 max_replicas=new_max_replicas_suggestion,
@@ -85,13 +115,6 @@ def alert_on_hpa_reached_limit_2(event: HorizontalPodAutoscalerChangeEvent, acti
         )
     }
 
-    # f"Update HPA max replicas to: {new_max_replicas_suggestion}": CallbackChoice(
-    #         action=scale_hpa_callback,
-    #         action_params=ScaleHPAParams(
-    #             max_replicas=new_max_replicas_suggestion,
-    #         ),
-    #         kubernetes_object=hpa,
-    #     )
     finding = Finding(
         title=f"HPA-TEST *{event.obj.metadata.name}* in namespace *{event.obj.metadata.namespace}* reached max replicas: *{hpa.spec.maxReplicas}*",
         severity=FindingSeverity.LOW,
