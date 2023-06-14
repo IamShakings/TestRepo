@@ -107,7 +107,7 @@ def alert_on_hpa_reached_limit_2(event: HorizontalPodAutoscalerChangeEvent, acti
     new_max_replicas_suggestion = ceil((action_params.increase_pct + 100) * hpa.spec.maxReplicas / 100)
 
     
-    scale_hpa_callback,
+    scale_hpa_callback_2,
     ScaleHPAParams(
         max_replicas=new_max_replicas_suggestion,
     ),
@@ -126,6 +126,7 @@ def alert_on_hpa_reached_limit_2(event: HorizontalPodAutoscalerChangeEvent, acti
         [
             MarkdownBlock(f"On average, pods scaled under this HPA are using *{avg_cpu} %* of the requested cpu."),
             # CallbackBlock(CallbackChoice),
+            scale_hpa_callback_2()
             
 
         ]
