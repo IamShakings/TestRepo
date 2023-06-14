@@ -126,7 +126,6 @@ def alert_on_hpa_reached_limit_2(event: HorizontalPodAutoscalerChangeEvent, acti
         [
             MarkdownBlock(f"On average, pods scaled under this HPA are using *{avg_cpu} %* of the requested cpu."),
             # CallbackBlock(CallbackChoice),
-            scale_hpa_callback_2(event, param)
             
 
         ]
