@@ -105,15 +105,15 @@ def alert_on_hpa_reached_limit_2(event: HorizontalPodAutoscalerChangeEvent, acti
 
     avg_cpu = int(hpa.status.currentCPUUtilizationPercentage)
     new_max_replicas_suggestion = ceil((action_params.increase_pct + 100) * hpa.spec.maxReplicas / 100)
-    choices = {
-        f"Update HPA max replicas to: {new_max_replicas_suggestion}"(
-            action=scale_hpa_callback_2,
-            action_params=ScaleHPAParams(
-                max_replicas=new_max_replicas_suggestion,
-            ),
-            kubernetes_object=hpa,
-        )
-    }
+    
+    label=f"Update HPA max replicas to: {new_max_replicas_suggestion}"(
+        action=scale_hpa_callback_2,
+        action_params=ScaleHPAParams(
+            max_replicas=new_max_replicas_suggestion,
+        ),
+        kubernetes_object=hpa,
+    )
+    
 
     finding = Finding(
         title=f"HPA-TEST *{event.obj.metadata.name}* in namespace *{event.obj.metadata.namespace}* reached max replicas: *{hpa.spec.maxReplicas}*",
@@ -124,8 +124,8 @@ def alert_on_hpa_reached_limit_2(event: HorizontalPodAutoscalerChangeEvent, acti
 
     finding.add_enrichment(
         [
-            MarkdownBlock(f"On average, pods scaled under this HPA are using *{avg_cpu} %* of the requested cpu. {choices}"),
-            # CallbackBlock(choices),
+            MarkdownBlock(f"On average, pods scaled under this HPA are using *{avg_cpu} %* of the requested cpu."),
+            CallbackBlock(label),
         ]
     )
     event.add_finding(finding)
