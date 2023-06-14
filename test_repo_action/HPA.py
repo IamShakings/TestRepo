@@ -16,6 +16,14 @@ class ScaleHPAParams(ActionParams):
 
     max_replicas: int
 
+class HPALimitParams(ActionParams):
+    """
+    :var increase_pct: Increase the HPA max_replicas by this percentage.
+    """
+
+    increase_pct: int = 20
+
+
 
 @action
 def scale_hpa_callback(event: HorizontalPodAutoscalerEvent, params: ScaleHPAParams):
@@ -39,30 +47,6 @@ def scale_hpa_callback(event: HorizontalPodAutoscalerEvent, params: ScaleHPAPara
         aggregation_key="scale_hpa_callback",
     )
     event.add_finding(finding)
-
-
-class HPALimitParams(ActionParams):
-    """
-    :var increase_pct: Increase the HPA max_replicas by this percentage.
-    """
-
-    increase_pct: int = 20
-
-
-class HPAMismatchParams(EventEnricherParams):
-    """
-    :var check_for_metrics_server: Checks if the metrics-server exists and adds a finding on how to add it.
-    """
-
-    # allowed a way to disable this finding for users who have custom setup
-    check_for_metrics_server: bool = True
-
-class ScaleHPAParams(ActionParams):
-    """
-    :var max_replicas: New max_replicas to set this HPA to.
-    """
-
-    max_replicas: int
 
 
 @action
@@ -109,7 +93,7 @@ def alert_on_hpa_reached_limit_2(event: HorizontalPodAutoscalerChangeEvent, acti
     param=ScaleHPAParams(
         max_replicas=new_max_replicas_suggestion,
     )
-    scale_hpa_callback_2(event, param)
+    
     
     kubernetes_object=hpa
     
@@ -126,7 +110,7 @@ def alert_on_hpa_reached_limit_2(event: HorizontalPodAutoscalerChangeEvent, acti
         [
             MarkdownBlock(f"On average, pods scaled under this HPA are using *{avg_cpu} %* of the requested cpu."),
             # CallbackBlock(CallbackChoice),
-            
+            scale_hpa_callback_2(event, param)
 
         ]
     )
