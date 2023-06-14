@@ -107,7 +107,7 @@ def alert_on_hpa_reached_limit_2(event: HorizontalPodAutoscalerChangeEvent, acti
     new_max_replicas_suggestion = ceil((action_params.increase_pct + 100) * hpa.spec.maxReplicas / 100)
     choices = {
         f"Update HPA max replicas to: {new_max_replicas_suggestion}"(
-            action=scale_hpa_callback,
+            action=scale_hpa_callback_2,
             action_params=ScaleHPAParams(
                 max_replicas=new_max_replicas_suggestion,
             ),
@@ -124,8 +124,8 @@ def alert_on_hpa_reached_limit_2(event: HorizontalPodAutoscalerChangeEvent, acti
 
     finding.add_enrichment(
         [
-            MarkdownBlock(f"On average, pods scaled under this HPA are using *{avg_cpu} %* of the requested cpu."),
-            CallbackBlock(choices),
+            MarkdownBlock(f"On average, pods scaled under this HPA are using *{avg_cpu} %* of the requested cpu. {choices}"),
+            # CallbackBlock(choices),
         ]
     )
     event.add_finding(finding)
