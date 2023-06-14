@@ -153,7 +153,7 @@ def hpa_mismatch_enricher(alert: PrometheusKubernetesAlert, params: HPAMismatchP
 
 
 @action
-def alert_on_hpa_reached_limit(event: HorizontalPodAutoscalerChangeEvent, action_params: HPALimitParams):
+def alert_on_hpa_reached_limit_2(event: HorizontalPodAutoscalerChangeEvent, action_params: HPALimitParams):
     """
     Notify when the HPA reaches its maximum replicas and allow fixing it.
     """
