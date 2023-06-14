@@ -84,7 +84,7 @@ def scale_hpa_callback_2(event: HorizontalPodAutoscalerEvent, params: ScaleHPAPa
         f"in namespace *{hpa.metadata.namespace}* updated to: *{params.max_replicas}*",
         severity=FindingSeverity.INFO,
         source=FindingSource.PROMETHEUS,
-        aggregation_key="scale_hpa_callback",
+        aggregation_key="scale_hpa_callback_2",
     )
     event.add_finding(finding)
 
@@ -106,11 +106,11 @@ def alert_on_hpa_reached_limit_2(event: HorizontalPodAutoscalerChangeEvent, acti
     avg_cpu = int(hpa.status.currentCPUUtilizationPercentage)
     new_max_replicas_suggestion = ceil((action_params.increase_pct + 100) * hpa.spec.maxReplicas / 100)
 
-    
-    scale_hpa_callback_2,
-    ScaleHPAParams(
+    param=ScaleHPAParams(
         max_replicas=new_max_replicas_suggestion,
-    ),
+    )
+    scale_hpa_callback_2(event, params)
+    
     kubernetes_object=hpa
     
 
@@ -126,7 +126,7 @@ def alert_on_hpa_reached_limit_2(event: HorizontalPodAutoscalerChangeEvent, acti
         [
             MarkdownBlock(f"On average, pods scaled under this HPA are using *{avg_cpu} %* of the requested cpu."),
             # CallbackBlock(CallbackChoice),
-            scale_hpa_callback_2()
+            scale_hpa_callback_2(event, params)
             
 
         ]
