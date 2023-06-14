@@ -186,10 +186,10 @@ def alert_on_hpa_reached_limit_2(event: HorizontalPodAutoscalerChangeEvent, acti
             kubernetes_object=hpa,
         )
     finding = Finding(
-        title=f"HPA *{event.obj.metadata.name}* in namespace *{event.obj.metadata.namespace}* reached max replicas: *{hpa.spec.maxReplicas}*",
+        title=f"HPA-TEST *{event.obj.metadata.name}* in namespace *{event.obj.metadata.namespace}* reached max replicas: *{hpa.spec.maxReplicas}*",
         severity=FindingSeverity.LOW,
         source=FindingSource.KUBERNETES_API_SERVER,
-        aggregation_key="alert_on_hpa_reached_limit",
+        aggregation_key="alert_on_hpa_reached_limit_2",
     )
 
     finding.add_enrichment(
