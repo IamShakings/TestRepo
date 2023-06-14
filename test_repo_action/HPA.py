@@ -4,22 +4,9 @@ from typing import Optional
 
 from kubernetes import client
 from kubernetes.client import ApiregistrationV1Api, V1DeploymentList
-from robusta.api import (
-    ActionParams,
-    CallbackBlock,
-    CallbackChoice,
-    EventEnricherParams,
-    Finding,
-    FindingSeverity,
-    FindingSource,
-    HorizontalPodAutoscalerChangeEvent,
-    HorizontalPodAutoscalerEvent,
-    MarkdownBlock,
-    PrometheusKubernetesAlert,
-    SlackAnnotations,
-    action,
-    get_resource_events_table,
-)
+from robusta.api import *
+import time
+
 
 
 class ScaleHPAParams(ActionParams):
@@ -168,23 +155,23 @@ def alert_on_hpa_reached_limit_2(event: HorizontalPodAutoscalerChangeEvent, acti
 
     avg_cpu = int(hpa.status.currentCPUUtilizationPercentage)
     new_max_replicas_suggestion = ceil((action_params.increase_pct + 100) * hpa.spec.maxReplicas / 100)
-    # choices = {
-    #     f"Update HPA max replicas to: {new_max_replicas_suggestion}": CallbackChoice(
-    #         action=scale_hpa_callback,
-    #         action_params=ScaleHPAParams(
-    #             max_replicas=new_max_replicas_suggestion,
-    #         ),
-    #         kubernetes_object=hpa,
-    #     )
-    # }
-
-    f"Update HPA max replicas to: {new_max_replicas_suggestion}": CallbackChoice(
+    choices = {
+        f"Update HPA max replicas to: {new_max_replicas_suggestion}": CallbackChoice(
             action=scale_hpa_callback,
             action_params=ScaleHPAParams(
                 max_replicas=new_max_replicas_suggestion,
             ),
             kubernetes_object=hpa,
         )
+    }
+
+    # f"Update HPA max replicas to: {new_max_replicas_suggestion}": CallbackChoice(
+    #         action=scale_hpa_callback,
+    #         action_params=ScaleHPAParams(
+    #             max_replicas=new_max_replicas_suggestion,
+    #         ),
+    #         kubernetes_object=hpa,
+    #     )
     finding = Finding(
         title=f"HPA-TEST *{event.obj.metadata.name}* in namespace *{event.obj.metadata.namespace}* reached max replicas: *{hpa.spec.maxReplicas}*",
         severity=FindingSeverity.LOW,
