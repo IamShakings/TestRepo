@@ -109,7 +109,7 @@ def alert_on_hpa_reached_limit_2(event: HorizontalPodAutoscalerChangeEvent, acti
     param=ScaleHPAParams(
         max_replicas=new_max_replicas_suggestion,
     )
-    scale_hpa_callback_2(event, params)
+    scale_hpa_callback_2(event, param)
     
     kubernetes_object=hpa
     
@@ -126,7 +126,7 @@ def alert_on_hpa_reached_limit_2(event: HorizontalPodAutoscalerChangeEvent, acti
         [
             MarkdownBlock(f"On average, pods scaled under this HPA are using *{avg_cpu} %* of the requested cpu."),
             # CallbackBlock(CallbackChoice),
-            scale_hpa_callback_2(event, params)
+            scale_hpa_callback_2(event, param)
             
 
         ]
