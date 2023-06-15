@@ -93,7 +93,7 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
         name = f"{git_safe_name(event.obj.metadata.name)}.yaml" #therma-<services-name>
         namespace = event.obj.metadata.namespace or "None" # namespace
         # service_name = event.obj.metadata.labels.service # ex. account-service 
-        role = event.obj.metadata.labels.role # ex. api/consumer
+        # role = event.obj.metadata.labels.role # ex. api/consumer
         # path = f"{git_safe_name(action_params.cluster_name)}/{git_safe_name(namespace)}"
         new_name = name.partition('-')[2]
         path = f"{git_safe_name(namespace)}/{git_safe_name(new_name)}/{'main'}"  # ex. beta/api/account-service/main
