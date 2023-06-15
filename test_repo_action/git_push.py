@@ -5,15 +5,18 @@ import hikaru
 from hikaru.meta import HikaruBase
 from pydantic import SecretStr
 
-from robusta.api import (
-    ActionParams,
-    GitRepoManager,
-    K8sOperationType,
-    KubernetesAnyChangeEvent,
-    action,
-    is_matching_diff,
-    is_base64_encoded
-)
+# from robusta.api import (
+#     ActionParams,
+#     GitRepoManager,
+#     K8sOperationType,
+#     KubernetesAnyChangeEvent,
+#     action,
+#     is_matching_diff,
+#     is_base64_encoded
+# )
+
+from robusta.api import *
+
 import base64
 import logging
 
@@ -89,10 +92,11 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
         )
         name = f"{git_safe_name(event.obj.metadata.name)}.yaml" #therma-<services-name>
         namespace = event.obj.metadata.namespace or "None" # namespace
-        service_name = event.obj.metadata.labels.service # ex. account-service 
+        # service_name = event.obj.metadata.labels.service # ex. account-service 
         role = event.obj.metadata.labels.role # ex. api/consumer
         # path = f"{git_safe_name(action_params.cluster_name)}/{git_safe_name(namespace)}"
-        path = f"{git_safe_name(namespace)}/{git_safe_name(role)}/{git_safe_name(service_name)}/{'main'}"  # ex. beta/api/account-service/main
+        new_name = name.partition('-')[2]
+        path = f"{git_safe_name(namespace)}/{git_safe_name(new_name)}/{'main'}"  # ex. beta/api/account-service/main
 
         if event.operation == K8sOperationType.DELETE:
             git_repo.delete_push(path, name, f"Delete {path}/{name}", action_params.cluster_name)
