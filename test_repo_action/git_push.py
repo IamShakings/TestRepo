@@ -70,7 +70,20 @@ def obj_diff(spec: HikaruBase, old_spec: HikaruBase, ignored_changes: List[str])
     filtered_diffs = list(filter(lambda x: not is_matching_diff(x, ignored_changes), all_diffs))
     return len(filtered_diffs) > 0
 
+def init_repo(self):
+        with self.repo_lock:
+            if os.path.exists(self.repo_local_path):
+                logging.info(f"Deleting local repo before init {self.repo_local_path}")
+                shutil.rmtree(self.repo_local_path)
 
+            logging.info(f"Cloning git repo {self.git_repo_url}. repo name {self.repo_name}")
+            os.makedirs(self.repo_local_path, exist_ok=True)
+            self.__exec_git_cmd(["git", "clone", self.git_repo_url, self.repo_local_path])
+            self.__exec_git_cmd(["git", "config", "--local", "user.email", "davidaugusto@hellotherma.com"])
+            self.__exec_git_cmd(["git", "config", "--local", "user.name", "hellodab"])
+            if self.git_branch:
+                self.__exec_git_cmd(["git", "checkout", self.git_branch])
+                
 @action
 def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditParams):
     """
@@ -91,6 +104,8 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
             action_params.git_key.get_secret_value(),
         )
         logging.info(f"Key value: {action_params.git_key.get_secret_value()}")
+
+        git_repo.init_repo()
 
         name = f"{git_safe_name(event.obj.metadata.name)}.yaml" #therma-<services-name>
         namespace = event.obj.metadata.namespace or "None" # namespace
