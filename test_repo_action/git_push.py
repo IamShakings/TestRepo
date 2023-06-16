@@ -90,8 +90,8 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
             action_params.git_url,
             action_params.git_key.get_secret_value(),
         )
-        logging.info(f"Key value: {ction_params.git_key.get_secret_value()}")
-        
+        logging.info(f"Key value: {action_params.git_key.get_secret_value()}")
+
         name = f"{git_safe_name(event.obj.metadata.name)}.yaml" #therma-<services-name>
         namespace = event.obj.metadata.namespace or "None" # namespace
         # service_name = event.obj.metadata.labels.service # ex. account-service 
