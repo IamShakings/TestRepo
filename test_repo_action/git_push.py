@@ -113,7 +113,12 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
         # role = event.obj.metadata.labels.role # ex. api/consumer
         # path = f"{git_safe_name(action_params.cluster_name)}/{git_safe_name(namespace)}"
         new_name = name.partition('-')[2]
-        path = f"{git_safe_name(namespace)}/{git_safe_name(new_name)}/{'main'}"  # ex. beta/api/account-service/main
+        findList = new_name
+        if "api" in findList.lower():
+            path = f"{git_safe_name(namespace)}/{'api'}/{git_safe_name(new_name)}/{'main'}"  # ex. beta/api/account-service/main
+        else:
+            path = f"{git_safe_name(namespace)}/{'consumer'}/{git_safe_name(new_name)}/{'main'}"  # ex. beta/consumer/account-service/main
+        
 
         if event.operation == K8sOperationType.DELETE:
             git_repo.delete_push(path, name, f"Delete {path}/{name}", action_params.cluster_name)
