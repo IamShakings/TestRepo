@@ -2,7 +2,7 @@
 name = "test_repo_action"
 version = "0.0.1"
 description = ""
-authors = ["David hellodab@users.noreply.github.com>"]
+authors = ["David <hellodab@users.noreply.github.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8.10"
