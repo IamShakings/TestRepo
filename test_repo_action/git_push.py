@@ -70,20 +70,7 @@ def obj_diff(spec: HikaruBase, old_spec: HikaruBase, ignored_changes: List[str])
     filtered_diffs = list(filter(lambda x: not is_matching_diff(x, ignored_changes), all_diffs))
     return len(filtered_diffs) > 0
 
-# def init_repo(self):
-#         with self.repo_lock:
-#             if os.path.exists(self.repo_local_path):
-#                 logging.info(f"Deleting local repo before init {self.repo_local_path}")
-#                 shutil.rmtree(self.repo_local_path)
 
-#             logging.info(f"Cloning git repo {self.git_repo_url}. repo name {self.repo_name}")
-#             os.makedirs(self.repo_local_path, exist_ok=True)
-#             self.__exec_git_cmd(["git", "clone", self.git_repo_url, self.repo_local_path])
-#             self.__exec_git_cmd(["git", "config", "--local", "user.email", "davidaugusto@hellotherma.com"])
-#             self.__exec_git_cmd(["git", "config", "--local", "user.name", "hellodab"])
-#             if self.git_branch:
-#                 self.__exec_git_cmd(["git", "checkout", self.git_branch])
-                
 @action
 def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditParams):
     """
@@ -93,8 +80,8 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
     Using this audit repository, you can easily detect unplanned changes on your clusters.
     """
     try:
-        # if event.obj.kind in skipped_kinds:
-        #     return
+        if event.obj.kind in skipped_kinds:
+            return
 
         if len(event.obj.metadata.ownerReferences) != 0:
             return  # not handling runtime objects
@@ -123,7 +110,7 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
         if event.operation == K8sOperationType.DELETE:
             git_repo.delete_push(path, name, f"Delete {path}/{name}", action_params.cluster_name)
         elif event.operation == K8sOperationType.CREATE:
-            obj_yaml = hikaru.get_yaml(event.obj.kind)
+            obj_yaml = hikaru.get_yaml(event.obj.spec)
             git_repo.commit_push(
                 obj_yaml,
                 path,
@@ -135,7 +122,7 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
             old_spec = event.old_obj.spec if event.old_obj else None
             if obj_diff(event.obj.spec, old_spec, action_params.ignored_changes):  # we have a change in the spec
                 git_repo.commit_push(
-                    hikaru.get_yaml(event.obj.kind),
+                    hikaru.get_yaml(event.obj.spec),
                     path,
                     name,
                     f"Update {event.obj.kind} named {event.obj.metadata.name} on namespace {namespace}",
