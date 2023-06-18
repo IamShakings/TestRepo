@@ -93,8 +93,8 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
     Using this audit repository, you can easily detect unplanned changes on your clusters.
     """
     try:
-        if event.obj.kind in skipped_kinds:
-            return
+        # if event.obj.kind in skipped_kinds:
+        #     return
 
         if len(event.obj.metadata.ownerReferences) != 0:
             return  # not handling runtime objects
