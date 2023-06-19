@@ -1,11 +1,105 @@
-
-    apiVersion: autoscaling/v1
-    kind: HorizontalPodAutoscaler
-    metadata:
-     name: test-deployment-changes-api.yaml
-    ---
-maxReplicas: 4
-minReplicas: 2
-scaleTargetRef: {apiVersion: apps/v1, kind: Deployment, name: test-deployment-changes-api}
-targetCPUUtilizationPercentage: 80
-
+- HorizontalPodAutoscaler
+- test-deployment-changes-api
+- !!python/object:hikaru.model.rel_1_16.v1.v1.HorizontalPodAutoscalerSpec
+  _field_catalog: !!python/object/apply:collections.defaultdict
+    args:
+    - &id003 !!python/name:builtins.list ''
+    dictitems:
+      apiVersion:
+      - !!python/object/new:hikaru.meta.CatalogEntry
+        - &id001 !!python/name:builtins.str ''
+        - apiVersion
+        - - scaleTargetRef
+          - apiVersion
+      kind:
+      - !!python/object/new:hikaru.meta.CatalogEntry
+        - *id001
+        - kind
+        - - scaleTargetRef
+          - kind
+      maxReplicas:
+      - &id004 !!python/object/new:hikaru.meta.CatalogEntry
+        - &id002 !!python/name:builtins.int ''
+        - maxReplicas
+        - - maxReplicas
+      minReplicas:
+      - &id005 !!python/object/new:hikaru.meta.CatalogEntry
+        - *id002
+        - minReplicas
+        - - minReplicas
+      name:
+      - !!python/object/new:hikaru.meta.CatalogEntry
+        - *id001
+        - name
+        - - scaleTargetRef
+          - name
+      scaleTargetRef:
+      - &id008 !!python/object/new:hikaru.meta.CatalogEntry
+        - &id007 !!python/name:hikaru.model.rel_1_16.v1.v1.CrossVersionObjectReference ''
+        - scaleTargetRef
+        - - scaleTargetRef
+      targetCPUUtilizationPercentage:
+      - &id006 !!python/object/new:hikaru.meta.CatalogEntry
+        - *id002
+        - targetCPUUtilizationPercentage
+        - - targetCPUUtilizationPercentage
+  _type_catalog: !!python/object/apply:collections.defaultdict
+    args:
+    - *id003
+    dictitems:
+      *id002:
+      - *id004
+      - *id005
+      - *id006
+      *id007:
+      - *id008
+      *id001:
+      - !!python/object/new:hikaru.meta.CatalogEntry
+        - *id001
+        - kind
+        - - scaleTargetRef
+          - kind
+      - !!python/object/new:hikaru.meta.CatalogEntry
+        - *id001
+        - name
+        - - scaleTargetRef
+          - name
+      - !!python/object/new:hikaru.meta.CatalogEntry
+        - *id001
+        - apiVersion
+        - - scaleTargetRef
+          - apiVersion
+  maxReplicas: 6
+  minReplicas: 2
+  scaleTargetRef: !!python/object:hikaru.model.rel_1_16.v1.v1.CrossVersionObjectReference
+    _field_catalog: !!python/object/apply:collections.defaultdict
+      args:
+      - *id003
+      dictitems:
+        apiVersion:
+        - &id011 !!python/object/new:hikaru.meta.CatalogEntry
+          - *id001
+          - apiVersion
+          - - apiVersion
+        kind:
+        - &id009 !!python/object/new:hikaru.meta.CatalogEntry
+          - *id001
+          - kind
+          - - kind
+        name:
+        - &id010 !!python/object/new:hikaru.meta.CatalogEntry
+          - *id001
+          - name
+          - - name
+    _type_catalog: !!python/object/apply:collections.defaultdict
+      args:
+      - *id003
+      dictitems:
+        *id001:
+        - *id009
+        - *id010
+        - *id011
+    apiVersion: apps/v1
+    kind: Deployment
+    name: test-deployment-changes-api
+  targetCPUUtilizationPercentage: 80
