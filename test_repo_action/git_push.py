@@ -20,6 +20,27 @@ from robusta.api import (
 import base64
 import logging
 
+test = """
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  labels:
+    kustomize.toolkit.fluxcd.io/name: account-api-service-beta
+    kustomize.toolkit.fluxcd.io/namespace: flux-system
+  name: therma-account-api-service
+  namespace: beta
+  resourceVersion: "146686470"
+  uid: 4782f6aa-2db5-4aea-ab2a-ddff64feeadb
+spec:
+  maxReplicas: 5
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: therma-account-api-service
+  targetCPUUtilizationPercentage: 80
+"""
+
 
 class GitAuditParams(ActionParams):
     """
@@ -99,7 +120,7 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
         # service_name = event.obj.metadata.labels.service # ex. account-service 
         # role = event.obj.metadata.labels.role # ex. api/consumer
         # path = f"{git_safe_name(action_params.cluster_name)}/{git_safe_name(namespace)}"
-
+        
         new_name = name.partition('-')[2]
         findList = new_name
         if "api" in findList.lower():
@@ -121,7 +142,8 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
         if event.operation == K8sOperationType.DELETE:
             git_repo.delete_push(path, name, f"Delete {path}/{name}", action_params.cluster_name)
         elif event.operation == K8sOperationType.CREATE:
-            obj_yaml = hikaru.load_full_yaml(event.obj.spec)
+            hikaru.load_full_yaml(test)
+            obj_yaml = hikaru.get_yaml(event.obj.spec)
             git_repo.commit_push(
                 obj_yaml,
                 path,
@@ -131,9 +153,10 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
             )
         else:  # update
             old_spec = event.old_obj.spec if event.old_obj else None
+            hikaru.load_full_yaml(test)
             if obj_diff(event.obj.spec, old_spec, action_params.ignored_changes):  # we have a change in the spec
                 git_repo.commit_push(
-                    hikaru.load_full_yaml(event.obj.spec),
+                    hikaru.get_yaml(event.obj.spec),
                     path,
                     name,
                     f"Update {event.obj.kind} named {event.obj.metadata.name} on namespace {namespace}",
