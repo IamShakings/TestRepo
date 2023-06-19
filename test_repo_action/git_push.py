@@ -73,7 +73,7 @@ def git_safe_name(name):
     return re.sub("[^0-9a-zA-Z\\-]+", "-", name)
 
 def hpa_yaml(name,obj_yaml):
-    f"""
+    hpa = f"""
     apiVersion: autoscaling/v1
     kind: HorizontalPodAutoscaler
     metadata:
@@ -146,7 +146,7 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
             obj_yaml = hikaru.get_yaml(event.obj.spec)
     
             git_repo.commit_push(
-                hpa_yaml(name,obj_yaml),
+                hpa_yaml.hpa(name,obj_yaml),
                 path,
                 name,
                 f"Create {event.obj.kind} named {event.obj.metadata.name} on namespace {namespace}",
@@ -159,7 +159,7 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
                     
                 git_repo.commit_push(
                     # hikaru.get_yaml(event.obj.spec),
-                    hpa_yaml(name,obj_yaml),
+                    hpa_yaml.hpa(name,obj_yaml),
                     path,
                     name,
                     f"Update {event.obj.kind} named {event.obj.metadata.name} on namespace {namespace}",
