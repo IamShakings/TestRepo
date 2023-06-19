@@ -20,7 +20,7 @@ from robusta.api import (
 
 import base64
 import logging
-import humanize
+import yaml
 
 
 
@@ -122,8 +122,8 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
         git_repo.pull_rebase()
         logging.info(f"Pulling possible changes")
         
-        yaml = [event.obj.kind,event.obj.metadata.name,event.obj.spec]
-        result = yaml.dump(yaml)
+        hpa_ = [event.obj.kind,event.obj.metadata.name,event.obj.spec]
+        result = yaml.dump(hpa_)
     
         if event.operation == K8sOperationType.DELETE:
             git_repo.delete_push(path, name, f"Delete {path}/{name}", action_params.cluster_name)
