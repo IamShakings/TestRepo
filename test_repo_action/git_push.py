@@ -143,10 +143,10 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
                 obj_yaml = hikaru.get_yaml(event.obj)
 
                 # Extract the desired fields
-                api_version = obj_yaml.get("apiVersion")
-                metadata_name = obj_yaml.get("metadata", {}).get("name")
-                specs = obj_yaml.get("spec")
-                logging.info(f"{api_version},{metadata_name},{specs}")
+                # api_version = obj_yaml.get("apiVersion")
+                # metadata_name = obj_yaml.get("metadata", {}).get("name")
+                # specs = obj_yaml.get("spec")
+                # logging.info(f"{api_version},{metadata_name},{specs}")
 
                 git_repo.commit_push(
                     obj_yaml,
