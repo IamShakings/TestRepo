@@ -1,11 +1,59 @@
-'---
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  annotations: {autoscaling.alpha.kubernetes.io/conditions: '[{"type":"AbleToScale","status":"True","lastTransitionTime":"2023-06-18T14:26:40Z","reason":"ReadyForNewScale","message":"recommended
+      size matches current size"},{"type":"ScalingActive","status":"True","lastTransitionTime":"2023-06-19T02:42:14Z","reason":"ValidMetricFound","message":"the
+      HPA was able to successfully calculate a replica count from memory resource
+      utilization (percentage of request)"},{"type":"ScalingLimited","status":"True","lastTransitionTime":"2023-06-19T02:43:00Z","reason":"TooFewReplicas","message":"the
+      desired replica count is less than the minimum replica count"}]', autoscaling.alpha.kubernetes.io/current-metrics: '[{"type":"Resource","resource":{"name":"memory","currentAverageUtilization":3,"currentAverageValue":"1970176"}},{"type":"Resource","resource":{"name":"cpu","currentAverageUtilization":0,"currentAverageValue":"0"}}]',
+    autoscaling.alpha.kubernetes.io/metrics: '[{"type":"Resource","resource":{"name":"memory","targetAverageUtilization":80}}]',
+    kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"autoscaling/v2beta2","kind":"HorizontalPodAutoscaler","metadata":{"annotations":{},"name":"test-deployment-changes-api","namespace":"beta"},"spec":{"maxReplicas":2,"metrics":[{"resource":{"name":"cpu","target":{"averageUtilization":80,"type":"Utilization"}},"type":"Resource"},{"resource":{"name":"memory","target":{"averageUtilization":80,"type":"AverageValue"}},"type":"Resource"}],"minReplicas":2,"scaleTargetRef":{"apiVersion":"apps/v1","kind":"Deployment","name":"test-deployment-changes-api"}}}
 
-  maxReplicas: 4
-
+      '}
+  creationTimestamp: '2023-06-18T14:26:25Z'
+  labels: {k8slens-edit-resource-version: v1}
+  managedFields:
+  - apiVersion: autoscaling/v2beta2
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata: {}
+      f:spec: {}
+    manager: kubectl-client-side-apply
+    operation: Update
+    time: '2023-06-18T14:26:25Z'
+  - apiVersion: autoscaling/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: '2023-06-18T14:26:40Z'
+  - apiVersion: autoscaling/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:labels: {}
+      f:spec: {}
+    manager: node-fetch
+    operation: Update
+    time: '2023-06-18T14:48:34Z'
+  - apiVersion: autoscaling/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations: {}
+      f:status: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: '2023-06-19T02:37:59Z'
+  name: test-deployment-changes-api
+  namespace: beta
+  resourceVersion: '147479300'
+  uid: cd25949c-4184-40ad-963d-15e5a8c89d83
+spec:
+  maxReplicas: 3
   minReplicas: 2
-
   scaleTargetRef: {apiVersion: apps/v1, kind: Deployment, name: test-deployment-changes-api}
-
   targetCPUUtilizationPercentage: 80
-
-  '
+status: {currentCPUUtilizationPercentage: 0, currentReplicas: 2, desiredReplicas: 2}
