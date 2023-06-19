@@ -54,16 +54,6 @@ class GitAuditParams(ActionParams):
 def git_safe_name(name):
     return re.sub("[^0-9a-zA-Z\\-]+", "-", name)
 
-
-def load_file(file_path: str) -> List[HikaruDocumentBase]:
-    """
-    Load and process a Kubernetes YAML file.
-
-    :param file_path: The path to the Kubernetes YAML file.
-    :return: A list of HikaruDocumentBase objects representing the documents in the YAML file.
-    """
-    return hikaru.load_full_yaml(path=file_path)
-
 # kinds with no 'spec'
 skipped_kinds: List[str] = [
     "Event",
@@ -138,7 +128,6 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
         else:  # update
             old_spec = event.old_obj.spec if event.old_obj else None
             if obj_diff(event.obj.spec, old_spec, action_params.ignored_changes):  # we have a change in the spec
-                # result = textwrap.dedent(hpa_yaml(name,obj_yaml))
                 # Convert the YAML string to a HikaruBase object
                 with open(event.obj, 'r') as file:
                     obj_yaml = yaml.safe_load(file)
