@@ -136,7 +136,7 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
             git_repo.delete_push(path, name, f"Delete {path}/{name}", action_params.cluster_name)
         elif event.operation == K8sOperationType.CREATE:
             obj_yaml = hikaru.get_yaml(event.obj.spec)
-            hpa_yaml_path = "../hpa.yaml"
+            hpa_yaml_path = f"../hpa.yaml"
             # Read the contents of hpa.yaml
             with open(hpa_yaml_path, "r") as file:
                 hpa_yaml = file.read()
@@ -151,7 +151,7 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
         else:  # update
             old_spec = event.old_obj.spec if event.old_obj else None
             if obj_diff(event.obj.spec, old_spec, action_params.ignored_changes):  # we have a change in the spec
-                hpa_yaml_path = "../hpa.yaml"
+                hpa_yaml_path = f"../hpa.yaml"
                 obj_yaml = hikaru.get_yaml(event.obj.spec)
                 with open(hpa_yaml_path, "r") as file:
                     hpa_yaml = file.read()
