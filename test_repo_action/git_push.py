@@ -108,7 +108,7 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
         
         git_repo.pull_rebase()
         logging.info(f"Pulling possible changes")
-        
+
         hpa_yaml =f"""
         apiVersion: autoscaling/v1
         kind: HorizontalPodAutoscaler
@@ -120,9 +120,9 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
         if event.operation == K8sOperationType.DELETE:
             git_repo.delete_push(path, name, f"Delete {path}/{name}", action_params.cluster_name)
         elif event.operation == K8sOperationType.CREATE:
-            # obj_yaml = hikaru.get_yaml(event.obj.spec)
+            obj_yaml = hikaru.get_yaml(event.obj.spec)
             git_repo.commit_push(
-                hpa_yaml,
+                obj_yaml,
                 path,
                 name,
                 f"Create {event.obj.kind} named {event.obj.metadata.name} on namespace {namespace}",
@@ -132,8 +132,7 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
             old_spec = event.old_obj.spec if event.old_obj else None
             if obj_diff(event.obj.spec, old_spec, action_params.ignored_changes):  # we have a change in the spec
                 git_repo.commit_push(
-                    # hikaru.get_yaml(event.obj.spec),
-                    hpa_yaml,
+                    hikaru.get_yaml(event.obj.spec),
                     path,
                     name,
                     f"Update {event.obj.kind} named {event.obj.metadata.name} on namespace {namespace}",
