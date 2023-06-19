@@ -130,22 +130,20 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
         
         git_repo.pull_rebase()
         logging.info(f"Pulling possible changes")
-
-        hpa_yaml =f"""
-        apiVersion: autoscaling/v1
-        kind: HorizontalPodAutoscaler
-        metadata:
-            name: {name}
-        {event.obj.spec}
-        """
+        
+        hpa_yaml_path = "../hpa.yaml"
 
         if event.operation == K8sOperationType.DELETE:
             git_repo.delete_push(path, name, f"Delete {path}/{name}", action_params.cluster_name)
         elif event.operation == K8sOperationType.CREATE:
-            hikaru.load_full_yaml(test)
             obj_yaml = hikaru.get_yaml(event.obj.spec)
+
+            # Read the contents of hpa.yaml
+            with open(hpa_yaml_path, "r") as file:
+                hpa_yaml = file.read()
             git_repo.commit_push(
-                obj_yaml,
+                # obj_yaml,
+                hpa_yaml,
                 path,
                 name,
                 f"Create {event.obj.kind} named {event.obj.metadata.name} on namespace {namespace}",
@@ -153,10 +151,15 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
             )
         else:  # update
             old_spec = event.old_obj.spec if event.old_obj else None
-            hikaru.load_full_yaml(test)
             if obj_diff(event.obj.spec, old_spec, action_params.ignored_changes):  # we have a change in the spec
+                
+                obj_yaml = hikaru.get_yaml(event.obj.spec)
+                with open(hpa_yaml_path, "r") as file:
+                    hpa_yaml = file.read()
+                    
                 git_repo.commit_push(
-                    hikaru.get_yaml(event.obj.spec),
+                    # hikaru.get_yaml(event.obj.spec),
+                    hpa_yaml,
                     path,
                     name,
                     f"Update {event.obj.kind} named {event.obj.metadata.name} on namespace {namespace}",
