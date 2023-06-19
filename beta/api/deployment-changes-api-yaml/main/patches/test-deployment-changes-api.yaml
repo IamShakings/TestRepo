@@ -1,7 +1,12 @@
 
-        apiVersion: autoscaling/v1
-        kind: HorizontalPodAutoscaler
-        metadata:
-            name: test-deployment-changes-api.yaml
-        HorizontalPodAutoscalerSpec(maxReplicas=4, scaleTargetRef=CrossVersionObjectReference(kind='Deployment', name='test-deployment-changes-api', apiVersion='apps/v1'), minReplicas=2, targetCPUUtilizationPercentage=80)
-        
+    apiVersion: autoscaling/v1
+    kind: HorizontalPodAutoscaler
+    metadata:
+    name: test-deployment-changes-api.yaml
+    ---
+maxReplicas: 3
+minReplicas: 2
+scaleTargetRef: {apiVersion: apps/v1, kind: Deployment, name: test-deployment-changes-api}
+targetCPUUtilizationPercentage: 80
+
+    
