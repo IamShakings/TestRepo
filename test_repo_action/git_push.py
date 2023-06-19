@@ -124,7 +124,7 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
             old_spec = event.old_obj.spec if event.old_obj else None
             if obj_diff(event.obj.spec, old_spec, action_params.ignored_changes):  # we have a change in the spec
                 git_repo.pull_rebase()
-                logging.info(f"Pulling possible changes")
+                logging.info(f"Pulling possible changes") 
                 git_repo.commit_push(
                     hikaru.get_yaml(event.obj.spec),
                     path,
