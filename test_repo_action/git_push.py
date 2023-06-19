@@ -72,6 +72,14 @@ class GitAuditParams(ActionParams):
 def git_safe_name(name):
     return re.sub("[^0-9a-zA-Z\\-]+", "-", name)
 
+def hpa_yaml(name,obj_yaml):
+    f"""
+    apiVersion: autoscaling/v1
+    kind: HorizontalPodAutoscaler
+    metadata:
+    name: {name}
+    {obj_yaml}
+    """
 
 # kinds with no 'spec'
 skipped_kinds: List[str] = [
@@ -136,13 +144,9 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
             git_repo.delete_push(path, name, f"Delete {path}/{name}", action_params.cluster_name)
         elif event.operation == K8sOperationType.CREATE:
             obj_yaml = hikaru.get_yaml(event.obj.spec)
-            hpa_yaml_path = f"../hpa.yaml"
-            # Read the contents of hpa.yaml
-            with open(hpa_yaml_path, "r") as file:
-                hpa_yaml = file.read()
+    
             git_repo.commit_push(
-                # obj_yaml,
-                hpa_yaml,
+                hpa_yaml(name,obj_yaml),
                 path,
                 name,
                 f"Create {event.obj.kind} named {event.obj.metadata.name} on namespace {namespace}",
@@ -151,14 +155,11 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
         else:  # update
             old_spec = event.old_obj.spec if event.old_obj else None
             if obj_diff(event.obj.spec, old_spec, action_params.ignored_changes):  # we have a change in the spec
-                hpa_yaml_path = f"../hpa.yaml"
                 obj_yaml = hikaru.get_yaml(event.obj.spec)
-                with open(hpa_yaml_path, "r") as file:
-                    hpa_yaml = file.read()
                     
                 git_repo.commit_push(
                     # hikaru.get_yaml(event.obj.spec),
-                    hpa_yaml,
+                    hpa_yaml(name,obj_yaml),
                     path,
                     name,
                     f"Update {event.obj.kind} named {event.obj.metadata.name} on namespace {namespace}",
