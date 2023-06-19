@@ -54,15 +54,15 @@ class GitAuditParams(ActionParams):
 def git_safe_name(name):
     return re.sub("[^0-9a-zA-Z\\-]+", "-", name)
 
-def hpa_yaml(name,obj_yaml)-> str:
-    hpa = f"""
-    apiVersion: autoscaling/v1
-    kind: HorizontalPodAutoscaler
-    metadata:
-     name: {name}
-    {obj_yaml}
+
+def load_file(file_path: str) -> List[HikaruDocumentBase]:
     """
-    return hpa
+    Load and process a Kubernetes YAML file.
+
+    :param file_path: The path to the Kubernetes YAML file.
+    :return: A list of HikaruDocumentBase objects representing the documents in the YAML file.
+    """
+    return hikaru.load_full_yaml(path=file_path)
 
 # kinds with no 'spec'
 skipped_kinds: List[str] = [
@@ -140,12 +140,13 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
             if obj_diff(event.obj.spec, old_spec, action_params.ignored_changes):  # we have a change in the spec
                 # result = textwrap.dedent(hpa_yaml(name,obj_yaml))
                 # Convert the YAML string to a HikaruBase object
-                obj_yaml = hikaru.parse_string(event.obj)
+                with open(event.obj, 'r') as file:
+                    obj_yaml = yaml.safe_load(file)
 
                 # Exclude the desired fields
-                obj_yaml.metadata.annotations = None
-                obj_yaml.metadata.creationTimestamp = None
-                obj_yaml.metadata.managedFields = None
+                del obj_yaml['metadata']['annotations']
+                del obj_yaml['metadata']['creationTimestamp']
+                del obj_yaml['metadata']['managedFields']
                 
                 filtered_yaml = hikaru.get_yaml(obj_yaml)
                 git_repo.commit_push(
