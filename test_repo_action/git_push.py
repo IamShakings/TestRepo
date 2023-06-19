@@ -139,16 +139,17 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
             old_spec = event.old_obj.spec if event.old_obj else None
             if obj_diff(event.obj.spec, old_spec, action_params.ignored_changes):  # we have a change in the spec
                 # result = textwrap.dedent(hpa_yaml(name,obj_yaml))
-                # Convert the Kubernetes object to YAML
-                obj_yaml = hikaru.get_yaml(event.obj)
+                # Convert the YAML string to a HikaruBase object
+                obj_yaml = hikaru.parse_string(event.obj)
 
                 # Exclude the desired fields
                 obj_yaml.metadata.annotations = None
                 obj_yaml.metadata.creationTimestamp = None
                 obj_yaml.metadata.managedFields = None
-
+                
+                filtered_yaml = hikaru.get_yaml(obj_yaml)
                 git_repo.commit_push(
-                    obj_yaml,
+                    filtered_yaml,
                     path,
                     name,
                     f"Update {event.obj.kind} named {event.obj.metadata.name} on namespace {namespace}",
