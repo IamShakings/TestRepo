@@ -137,8 +137,8 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
             old_spec = event.old_obj.spec if event.old_obj else None
             if obj_diff(event.obj.spec, old_spec, action_params.ignored_changes):  # we have a change in the spec
                 # Convert the YAML string to a HikaruBase object
-                string_yaml = hikaru.get_yaml(event.obj)
-                obj_yaml = load_file(string_yaml)
+                # string_yaml = hikaru.get_yaml(event.obj) 
+                obj_yaml = hikaru.get_yaml(event.obj) #load_file(string_yaml)
 
                 # Exclude the desired fields
                 # del obj_yaml['metadata']['annotations']
