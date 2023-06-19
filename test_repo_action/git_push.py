@@ -20,26 +20,6 @@ from robusta.api import (
 import base64
 import logging
 
-test = """
-apiVersion: autoscaling/v1
-kind: HorizontalPodAutoscaler
-metadata:
-  labels:
-    kustomize.toolkit.fluxcd.io/name: account-api-service-beta
-    kustomize.toolkit.fluxcd.io/namespace: flux-system
-  name: therma-account-api-service
-  namespace: beta
-  resourceVersion: "146686470"
-  uid: 4782f6aa-2db5-4aea-ab2a-ddff64feeadb
-spec:
-  maxReplicas: 5
-  minReplicas: 1
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: therma-account-api-service
-  targetCPUUtilizationPercentage: 80
-"""
 
 
 class GitAuditParams(ActionParams):
@@ -72,7 +52,7 @@ class GitAuditParams(ActionParams):
 def git_safe_name(name):
     return re.sub("[^0-9a-zA-Z\\-]+", "-", name)
 
-def hpa_yaml(name,obj_yaml):
+def hpa_yaml(name,obj_yaml)-> str:
     hpa = f"""
     apiVersion: autoscaling/v1
     kind: HorizontalPodAutoscaler
@@ -145,9 +125,9 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
             git_repo.delete_push(path, name, f"Delete {path}/{name}", action_params.cluster_name)
         elif event.operation == K8sOperationType.CREATE:
             obj_yaml = hikaru.get_yaml(event.obj.spec)
-    
+            result = hpa_yaml(name,obj_yaml)
             git_repo.commit_push(
-                hpa_yaml(name,obj_yaml),
+                result,
                 path,
                 name,
                 f"Create {event.obj.kind} named {event.obj.metadata.name} on namespace {namespace}",
@@ -157,10 +137,10 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
             old_spec = event.old_obj.spec if event.old_obj else None
             if obj_diff(event.obj.spec, old_spec, action_params.ignored_changes):  # we have a change in the spec
                 obj_yaml = hikaru.get_yaml(event.obj.spec)
-                    
+                result = hpa_yaml(name,obj_yaml)
                 git_repo.commit_push(
                     # hikaru.get_yaml(event.obj.spec),
-                    hpa_yaml(name,obj_yaml),
+                    result,
                     path,
                     name,
                     f"Update {event.obj.kind} named {event.obj.metadata.name} on namespace {namespace}",
