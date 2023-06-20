@@ -1,5 +1,0 @@
----
-maxReplicas: 3
-minReplicas: 2
-scaleTargetRef: {apiVersion: apps/v1, kind: Deployment, name: test-deployment-changes-api}
-targetCPUUtilizationPercentage: 80

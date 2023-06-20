@@ -104,15 +104,17 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
 
         # git_repo.init_repo()
 
-        name = f"{git_safe_name(event.obj.metadata.name)}.yaml" #therma-<services-name>
+        name = f"{git_safe_name(event.obj.metadata.name)}" #therma-<services-name>
         file_name = f"hpa.yaml" #hpa.yaml
         namespace = event.obj.metadata.namespace or "None" # namespace
         new_name = name.partition('-')[2]
         findList = new_name
-        if "api" in findList.lower():
+        if "api" in findList.lower() or "service" in findList.lower():
             path = f"{git_safe_name(namespace)}/{'api'}/{git_safe_name(new_name)}/{'main'}/{'patches'}"  # ex. beta/api/account-service/main/patches
+            logging.info(f"Api")
         else:
             path = f"{git_safe_name(namespace)}/{'consumer'}/{git_safe_name(new_name)}/{'main'}/{'patches'}"  # ex. beta/consumer/account-service/main/patches
+            logging.info(f"Consumer")
         
         git_repo.pull_rebase()
         logging.info(f"Pulling possible changes")
