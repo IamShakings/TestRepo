@@ -1,11 +1,11 @@
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  creationTimestamp: '2023-06-18T14:26:25Z'
+  creationTimestamp: '2023-06-20T02:27:26Z'
   name: test-deployment-changes-api
   namespace: beta
 spec:
-  maxReplicas: 2
+  maxReplicas: 3
   minReplicas: 2
   scaleTargetRef:
     apiVersion: apps/v1
