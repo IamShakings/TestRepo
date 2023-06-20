@@ -100,26 +100,25 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
             action_params.git_url,
             action_params.git_key.get_secret_value(),
         )
-        logging.info(f"Key value: {action_params.git_key.get_secret_value()}")
-
         # git_repo.init_repo()
 
         name = f"{git_safe_name(event.obj.metadata.name)}" #therma-<services-name>
-        file_name = f"hpa.yaml" #hpa.yaml
+        file_name = "hpa.yaml" #hpa.yaml
         namespace = event.obj.metadata.namespace or "None" # namespace
         findList = name
-        # if "api" in findList.lower() or "service" in findList.lower():
-        #     path = f"{git_safe_name(namespace)}/{'api'}/{git_safe_name(name)}/{'main'}/{'patches'}"  # ex. beta/api/account-service/main/patches
-        #     logging.info(f"Api")
-        # elif "consumer" in findList.lower():
-        #     path = f"{git_safe_name(namespace)}/{'consumer'}/{git_safe_name(name)}/{'main'}/{'patches'}"  # ex. beta/consumer/account-service/main/patches
-        #     logging.info(f"Consumer")
-        # else:
-        #     logging.info(f"Cannot create a path")
-        path = f"{git_safe_name(namespace)}/{'consumer'}/{git_safe_name(name)}/{'main'}/{'patches'}"  # ex. beta/consumer/account-service/main/patches
+
+        if "api" in findList.lower() or "service" in findList.lower():
+            path = f"{git_safe_name(namespace)}/{'api'}/{git_safe_name(name)}/{'main'}/{'patches'}"  # ex. beta/api/account-service/main/patches
+            logging.info("Api")
+        elif "consumer" in findList.lower():
+            path = f"{git_safe_name(namespace)}/{'consumer'}/{git_safe_name(name)}/{'main'}/{'patches'}"  # ex. beta/consumer/account-service/main/patches
+            logging.info("Consumer")
+        else:
+            logging.info("Cannot create a path")
         
         git_repo.pull_rebase()
-        logging.info(f"Pulling possible changes")
+
+        logging.info("Pulling possible changes")
         
     
         if event.operation == K8sOperationType.DELETE:
