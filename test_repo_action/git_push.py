@@ -105,11 +105,8 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
         # git_repo.init_repo()
 
         name = f"{git_safe_name(event.obj.metadata.name)}.yaml" #therma-<services-name>
+        file_name = f"hpa.yaml" #hpa.yaml
         namespace = event.obj.metadata.namespace or "None" # namespace
-        # service_name = event.obj.metadata.labels.service # ex. account-service 
-        # role = event.obj.metadata.labels.role # ex. api/consumer
-        # path = f"{git_safe_name(action_params.cluster_name)}/{git_safe_name(namespace)}"
-        
         new_name = name.partition('-')[2]
         findList = new_name
         if "api" in findList.lower():
@@ -124,12 +121,36 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
         if event.operation == K8sOperationType.DELETE:
             git_repo.delete_push(path, name, f"Delete {path}/{name}", action_params.cluster_name)
         elif event.operation == K8sOperationType.CREATE:
+            # Convert the YAML string to a HikaruBase object
             obj_yaml = hikaru.get_yaml(event.obj)
-            # result = textwrap.dedent(hpa_yaml(name,obj_yaml))
+            
+            # Convert YAML to Python object
+            convert_yaml = yaml.safe_load(obj_yaml)
+
+            # Exclude the desired fields
+            if "metadata" in convert_yaml:
+                metadata = convert_yaml["metadata"]
+                if "managedFields" in metadata:
+                    del metadata["managedFields"]
+                if "annotations" in metadata:
+                    del metadata["annotations"]
+                if "labels" in metadata:
+                    del metadata["labels"]
+                if "creationTimestamp" in metadata:
+                    del metadata["creationTimestamp"]
+                if "resourceVersion" in metadata:
+                    del metadata["resourceVersion"]
+                if "uid" in metadata:
+                    del metadata["uid"]
+            if "status" in convert_yaml:
+                del convert_yaml["status"]
+            
+            # Convert the modified object back to YAML
+            filtered_yaml = yaml.dump(convert_yaml)
             git_repo.commit_push(
-                obj_yaml,
+                filtered_yaml,
                 path,
-                name,
+                file_name,
                 f"Create {event.obj.kind} named {event.obj.metadata.name} on namespace {namespace}",
                 action_params.cluster_name,
             )
@@ -137,8 +158,8 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
             old_spec = event.old_obj.spec if event.old_obj else None
             if obj_diff(event.obj.spec, old_spec, action_params.ignored_changes):  # we have a change in the spec
                 # Convert the YAML string to a HikaruBase object
-                # string_yaml = hikaru.get_yaml(event.obj) 
                 obj_yaml = hikaru.get_yaml(event.obj)
+
                 # Convert YAML to Python object
                 convert_yaml = yaml.safe_load(obj_yaml)
 
@@ -160,13 +181,12 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
                 if "status" in convert_yaml:
                     del convert_yaml["status"]
                 
-                # filtered_yaml = hikaru.get_yaml(convert_yaml)
                 # Convert the modified object back to YAML
                 filtered_yaml = yaml.dump(convert_yaml)
                 git_repo.commit_push(
                     filtered_yaml,
                     path,
-                    name,
+                    file_name,
                     f"Update {event.obj.kind} named {event.obj.metadata.name} on namespace {namespace}",
                     action_params.cluster_name,
                 )
