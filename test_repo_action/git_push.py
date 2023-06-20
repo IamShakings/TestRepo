@@ -139,11 +139,19 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
                 # Convert the YAML string to a HikaruBase object
                 # string_yaml = hikaru.get_yaml(event.obj) 
                 obj_yaml = hikaru.get_yaml(event.obj) #load_file(string_yaml)
+                skipped_fields: List[str] = [
+                    "annotations",
+                    "creationTimestamp",
+                    "managedFields",
+                ]
 
+                for field in skipped_fields:
+                    if field in obj_yaml['metadata']:
+                        del obj_yaml['metadata'][field]
                 # Exclude the desired fields
-                del obj_yaml['metadata']['annotations']
-                del obj_yaml['metadata']['creationTimestamp']
-                del obj_yaml['metadata']['managedFields']
+                # del obj_yaml['metadata']['annotations']
+                # del obj_yaml['metadata']['creationTimestamp']
+                # del obj_yaml['metadata']['managedFields']
                 # del obj_yaml.metadata.annotations
                 # del obj_yaml.metadata.creationTimestamp
                 # del obj_yaml.metadata.managedFields
