@@ -160,7 +160,9 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
                 if "status" in convert_yaml:
                     del convert_yaml["status"]
                 
-                filtered_yaml = hikaru.get_yaml(convert_yaml)
+                # filtered_yaml = hikaru.get_yaml(convert_yaml)
+                # Convert the modified object back to YAML
+                filtered_yaml = yaml.dump(convert_yaml)
                 git_repo.commit_push(
                     filtered_yaml,
                     path,
