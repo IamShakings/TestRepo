@@ -145,9 +145,7 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
                     "managedFields",
                 ]
 
-                for field in skipped_fields:
-                    if field in obj_yaml['metadata']:
-                        del obj_yaml['metadata'][field]
+                obj_yaml['metadata'] = {key: value for key, value in obj_yaml['metadata'].items() if key not in skipped_fields}
                 # Exclude the desired fields
                 # del obj_yaml['metadata']['annotations']
                 # del obj_yaml['metadata']['creationTimestamp']
