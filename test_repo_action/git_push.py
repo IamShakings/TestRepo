@@ -151,7 +151,7 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
                         del metadata["annotations"]
                     if "labels" in metadata:
                         del metadata["labels"]
-                    if "creationTimestamp:" in metadata:
+                    if "creationTimestamp" in metadata:
                         del metadata["creationTimestamp"]
                     if "resourceVersion" in metadata:
                         del metadata["resourceVersion"]
