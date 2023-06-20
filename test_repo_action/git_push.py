@@ -119,7 +119,7 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
         
     
         if event.operation == K8sOperationType.DELETE:
-            git_repo.delete_push(path, name, f"Delete {path}/{name}", action_params.cluster_name)
+            git_repo.delete_push(path, file_name, f"Delete {path}/{file_name}", action_params.cluster_name)
         elif event.operation == K8sOperationType.CREATE:
             # Convert the YAML string to a HikaruBase object
             obj_yaml = hikaru.get_yaml(event.obj)
