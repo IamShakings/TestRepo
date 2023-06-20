@@ -5,7 +5,7 @@ metadata:
   namespace: beta
 spec:
   maxReplicas: 5
-  minReplicas: 3
+  minReplicas: 5
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
