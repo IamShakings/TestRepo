@@ -112,9 +112,11 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
         if "api" in findList.lower() or "service" in findList.lower():
             path = f"{git_safe_name(namespace)}/{'api'}/{git_safe_name(new_name)}/{'main'}/{'patches'}"  # ex. beta/api/account-service/main/patches
             logging.info(f"Api")
-        else:
+        elif "consumer" in findList.lower():
             path = f"{git_safe_name(namespace)}/{'consumer'}/{git_safe_name(new_name)}/{'main'}/{'patches'}"  # ex. beta/consumer/account-service/main/patches
             logging.info(f"Consumer")
+        else:
+            logging.info(f"Cannot create a path")
         
         git_repo.pull_rebase()
         logging.info(f"Pulling possible changes")
