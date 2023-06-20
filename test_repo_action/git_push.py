@@ -138,23 +138,29 @@ def git_push_changes(event: KubernetesAnyChangeEvent, action_params: GitAuditPar
             if obj_diff(event.obj.spec, old_spec, action_params.ignored_changes):  # we have a change in the spec
                 # Convert the YAML string to a HikaruBase object
                 # string_yaml = hikaru.get_yaml(event.obj) 
-                obj_yaml = hikaru.get_yaml(event.obj) #load_file(string_yaml)
-                skipped_fields = [
-                    "annotations",
-                    "creationTimestamp",
-                    "managedFields",
-                ]
+                obj_yaml = hikaru.get_yaml(event.obj)
+                # Convert YAML to Python object
+                convert_yaml = yaml.safe_load(obj_yaml)
 
-                obj_yaml = {key: value for key, value in hikaru.get_yaml(event.obj) if key not in skipped_fields}
                 # Exclude the desired fields
-                # del obj_yaml['metadata']['annotations']
-                # del obj_yaml['metadata']['creationTimestamp']
-                # del obj_yaml['metadata']['managedFields']
-                # del obj_yaml.metadata.annotations
-                # del obj_yaml.metadata.creationTimestamp
-                # del obj_yaml.metadata.managedFields
+                if "metadata" in convert_yaml:
+                    metadata = convert_yaml["metadata"]
+                    if "managedFields" in metadata:
+                        del metadata["managedFields"]
+                    if "annotations" in metadata:
+                        del metadata["annotations"]
+                    if "labels" in metadata:
+                        del metadata["labels"]
+                    if "creationTimestamp:" in metadata:
+                        del metadata["creationTimestamp"]
+                    if "resourceVersion" in metadata:
+                        del metadata["resourceVersion"]
+                    if "uid" in metadata:
+                        del metadata["uid"]
+                if "status" in convert_yaml:
+                    del convert_yaml["status"]
                 
-                filtered_yaml = hikaru.get_yaml(obj_yaml)
+                filtered_yaml = hikaru.get_yaml(convert_yaml)
                 git_repo.commit_push(
                     filtered_yaml,
                     path,
