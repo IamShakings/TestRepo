@@ -4,7 +4,7 @@ metadata:
   name: test-deployment-changes-consumer
   namespace: beta
 spec:
-  maxReplicas: 5
+  maxReplicas: 3
   minReplicas: 3
   scaleTargetRef:
     apiVersion: apps/v1
