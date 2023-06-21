@@ -25,7 +25,7 @@ class HPALimitParams(ActionParams):
 
 
 @action
-def scale_hpa_callback_2(event: HorizontalPodAutoscalerEvent, params: ScaleHPAParams):
+def scale_hpa(event: HorizontalPodAutoscalerEvent, params: ScaleHPAParams):
     """
     Update the max_replicas of this HPA to the specified value.
 
@@ -33,7 +33,7 @@ def scale_hpa_callback_2(event: HorizontalPodAutoscalerEvent, params: ScaleHPAPa
     """
     hpa = event.get_horizontalpodautoscaler()
     if not hpa:
-        logging.info(f"scale_hpa_callback - no hpa on event: {event}")
+        logging.info(f"scale_hpa - no hpa on event: {event}")
         return
 
     hpa.spec.maxReplicas = params.max_replicas
@@ -43,17 +43,17 @@ def scale_hpa_callback_2(event: HorizontalPodAutoscalerEvent, params: ScaleHPAPa
         f"in namespace *{hpa.metadata.namespace}* updated to: *{params.max_replicas}*",
         severity=FindingSeverity.INFO,
         source=FindingSource.PROMETHEUS,
-        aggregation_key="scale_hpa_callback_2",
+        aggregation_key="scale_hpa",
     )
     event.add_finding(finding)
 
 
 @action
-def alert_on_hpa_reached_limit_2(event: HorizontalPodAutoscalerChangeEvent, action_params: HPALimitParams):
+def update_on_hpa_reached_limit(event: HorizontalPodAutoscalerChangeEvent, action_params: HPALimitParams):
     """
     Notify when the HPA reaches its maximum replicas and allow fixing it.
     """
-    logging.info(f"running alert_on_hpa_reached_limit: {event.obj.metadata.name} ns: {event.obj.metadata.namespace}")
+    logging.info(f"running update_on_hpa_reached_limit: {event.obj.metadata.name} ns: {event.obj.metadata.namespace}")
 
     hpa = event.obj
     if hpa.status.currentReplicas == event.old_obj.status.currentReplicas:
@@ -78,14 +78,14 @@ def alert_on_hpa_reached_limit_2(event: HorizontalPodAutoscalerChangeEvent, acti
         title=f"HPA-TEST *{event.obj.metadata.name}* in namespace *{event.obj.metadata.namespace}* reached max replicas: *{hpa.spec.maxReplicas}*",
         severity=FindingSeverity.LOW,
         source=FindingSource.KUBERNETES_API_SERVER,
-        aggregation_key="alert_on_hpa_reached_limit_2",
+        aggregation_key="update_on_hpa_reached_limit",
     )
 
     finding.add_enrichment(
         [
             MarkdownBlock(f"On average, pods scaled under this HPA are using *{avg_cpu} %* of the requested cpu."),
             # CallbackBlock(CallbackChoice),
-            scale_hpa_callback_2(event, param)
+            scale_hpa(event, param)
 
         ]
     )
