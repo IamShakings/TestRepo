@@ -1,0 +1,13 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: therma-equipment-service
+  namespace: beta
+spec:
+  maxReplicas: 8
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: therma-equipment-service
+  targetCPUUtilizationPercentage: 80
