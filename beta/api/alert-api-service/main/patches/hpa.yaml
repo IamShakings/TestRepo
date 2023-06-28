@@ -4,7 +4,7 @@ metadata:
   name: therma-alert-api-service
   namespace: beta
 spec:
-  maxReplicas: 6
+  maxReplicas: 5
   minReplicas: 1
   scaleTargetRef:
     apiVersion: apps/v1
