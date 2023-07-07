@@ -1,0 +1,6 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: test-deployment-changes-consumer
+spec:
+  maxReplicas: 2
