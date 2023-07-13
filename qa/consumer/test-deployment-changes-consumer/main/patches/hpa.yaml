@@ -3,4 +3,4 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: test-deployment-changes-consumer
 spec:
-  maxReplicas: 5
+  maxReplicas: 2
