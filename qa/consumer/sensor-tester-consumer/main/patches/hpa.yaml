@@ -3,4 +3,4 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: therma-sensor-tester-consumer
 spec:
-  maxReplicas: 4
+  maxReplicas: 3
