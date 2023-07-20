@@ -3,4 +3,4 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: therma-energy-apis-test
 spec:
-  maxReplicas: 5
+  maxReplicas: 3
