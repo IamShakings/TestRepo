@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-energy-apis-auth
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: application
+          resources:
+            limits:
+              cpu: "1"
+              memory: 800Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi

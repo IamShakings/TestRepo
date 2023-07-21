@@ -1,0 +1,16 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: savings-generator
+  namespace: flux-system
+spec:
+  filterTags:
+    extract: "$ts"
+    pattern: ^develop_[a-f0-9]+_(?P<ts>[0-9]{14})$
+  imageRepositoryRef:
+    name: savings-generator
+  policy:
+    numerical:
+      order: asc
+
