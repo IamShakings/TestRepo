@@ -1,7 +1,0 @@
-apiVersion: autoscaling/v2beta2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: therma-energy-api-gateway
-spec:
-  maxReplicas: 5
-  
