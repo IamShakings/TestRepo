@@ -1,0 +1,11 @@
+namespace: development
+resources:
+  - ./image-policy.yaml
+  - ./image-automation.yaml
+  - ./ingress.yaml
+  - ../../../../energy-bases/external-apis/therma-energy-apis-auth/main
+patchesStrategicMerge:
+  - ./patches/resources.yaml
+  - ./patches/image.yaml
+  - ./patches/env.yaml
+  - ./patches/hpa.yaml
