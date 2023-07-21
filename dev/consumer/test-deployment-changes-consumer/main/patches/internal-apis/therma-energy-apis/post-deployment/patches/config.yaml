@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration
+spec:
+  template:
+    spec:
+      containers:
+      - name: migration
+        envFrom:
+          - configMapRef:
+              name: therma-server-config
+          - configMapRef:
+              name: energy-server-config
+          - secretRef:
+              name: amqp-credentials
+          - secretRef:
+              name: energy-influxdb-credentials
+          - secretRef:
+              name: energy-postgres-credentials
+          - secretRef:
+              name:  energy-api-keys
