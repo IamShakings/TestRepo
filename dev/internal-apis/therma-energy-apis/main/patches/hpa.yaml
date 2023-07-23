@@ -4,4 +4,3 @@ metadata:
   name: therma-energy-apis
 spec:
   maxReplicas: 5
-  
