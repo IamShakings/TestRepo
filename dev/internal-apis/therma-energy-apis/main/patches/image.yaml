@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-energy-apis
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/therma-energy-apis:develop_badf2f79e4715dc9579f7ca261a3db18ac707893_20230707162610 # {"$imagepolicy": "development:therma-energy-apis"} 
