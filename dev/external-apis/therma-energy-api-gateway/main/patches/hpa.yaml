@@ -3,4 +3,4 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: therma-energy-api-gateway
 spec:
-  maxReplicas: 4
+  maxReplicas: 2
