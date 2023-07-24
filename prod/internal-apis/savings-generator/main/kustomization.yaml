@@ -1,0 +1,10 @@
+namespace: production
+resources:
+  - ./image-policy.yaml
+  - ./image-automation.yaml
+bases:
+  - ../../../../energy-bases/internal-apis/savings-generator/main
+patchesStrategicMerge:
+  - ./patches/resources.yaml
+  - ./patches/image.yaml
+  - ./patches/hpa.yaml

@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: savings-generator
+spec:
+  template:
+    spec:
+      containers:
+        - name: application #TODO
+          image: mewe/savings-generator-service:master_1851f0dce4e2b385d93ed098199c08b94314208d_20230717140639 # {"$imagepolicy": "production:savings-generator"} 

@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-energy-apis
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: application #TODO
+          image: mewe/therma-energy-apis:master_21a8cf04bd08c21c2baefe4cdc8ecc574331926c_20230707155645 # {"$imagepolicy": "production:therma-energy-apis"} 
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1600Mi
+            requests:
+              cpu: 100m
+              memory: 200Mi

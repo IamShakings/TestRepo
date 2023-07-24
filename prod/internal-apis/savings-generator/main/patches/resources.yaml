@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: savings-generator
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: application #TODO
+          image: mewe/savings-generator-service:master_c452cf4bba25b959f8b65c573703553b3c42f9db_20230410223718 # {"$imagepolicy": "production:savings-generator-service"} 
+          resources:
+            limits:
+              cpu: "1"
+              memory: 600Mi
+            requests:
+              cpu: 300m
+              memory: 100Mi

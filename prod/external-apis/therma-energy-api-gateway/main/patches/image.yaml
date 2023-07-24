@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-energy-api-gateway
+spec:
+  template:
+    spec:
+      containers:
+        - name: application #TODO
+          image: mewe/therma-energy-api-gateway:master_0fa7905c8032320f56c539170d648abec214acfc_20230622002929 # {"$imagepolicy": "production:therma-energy-api-gateway"} 

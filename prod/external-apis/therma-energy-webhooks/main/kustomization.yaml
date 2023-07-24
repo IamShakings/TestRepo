@@ -1,0 +1,11 @@
+namespace: production
+resources:
+  - ./image-policy.yaml
+  - ./image-automation.yaml
+bases:
+  - ../../../../energy-bases/external-apis/therma-energy-webhooks/main
+patchesStrategicMerge:
+  - ./patches/resources.yaml
+  - ./patches/image.yaml
+  - ./patches/ingress.yaml
+  - ./patches/hpa.yaml

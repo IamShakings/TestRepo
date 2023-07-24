@@ -1,0 +1,10 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration
+spec:
+  template:
+    spec:
+      containers:
+      - name: migration #TODO
+        image: mewe/therma-energy-apis:master_21a8cf04bd08c21c2baefe4cdc8ecc574331926c_20230707155645 # {"$imagepolicy": "production:therma-energy-apis"} 

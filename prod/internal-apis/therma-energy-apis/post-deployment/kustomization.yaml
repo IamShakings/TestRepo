@@ -1,0 +1,8 @@
+namespace: production
+resources:
+  - ../../../../energy-bases/internal-apis/therma-energy-apis/post-deployment
+patchesStrategicMerge:
+  - ./patches/image.yaml
+  - ./patches/config.yaml
+nameSuffix: -therma-energy-apis
+
