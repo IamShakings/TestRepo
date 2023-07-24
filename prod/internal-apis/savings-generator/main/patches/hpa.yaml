@@ -3,5 +3,4 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: savings-generator
 spec:
-  maxReplicas: 5
-  
+  maxReplicas: 3
