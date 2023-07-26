@@ -3,4 +3,4 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: therma-report-generator-consumer
 spec:
-  maxReplicas: 2
+  maxReplicas: 5
