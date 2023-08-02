@@ -3,4 +3,4 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: therma-alert-service
 spec:
-  maxReplicas: 6
+  maxReplicas: 8
