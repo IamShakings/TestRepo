@@ -3,4 +3,4 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: therma-audit-log-api-service
 spec:
-  maxReplicas: 2
+  maxReplicas: 1
