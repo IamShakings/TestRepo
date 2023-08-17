@@ -3,5 +3,4 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: therma-downlink-consumer
 spec:
-  maxReplicas: 5
-
+  maxReplicas: 6
