@@ -1,0 +1,17 @@
+apiVersion: v1
+data:
+  SHIPSTATION_API_URL: "https://ssapi.shipstation.com"
+  SHIPSTATION_HUB_NAME: "Dragino Hub"
+  SHIPSTATION_HUB_ID: "6401876"
+  SHIPSTATION_SENSOR_NAME: "Dragino Sensor"
+  SHIPSTATION_SENSOR_ID: "6401877"
+  SHIPSTATION_ADDRESS_NAME: "Therma Staging"
+  SHIPSTATION_ADDRESS_COMPANY: "Therma Staging"
+  SHIPSTATION_ADDRESS_STREET1: "1516 Folsom Street"
+  SHIPSTATION_ADDRESS_CITY: "San Francisco"
+  SHIPSTATION_ADDRESS_STATE: "California"
+  SHIPSTATION_ADDRESS_COUNTRY: "US"
+  SHIPSTATION_ADDRESS_POSTAL: "94103"
+kind: ConfigMap
+metadata:
+  name: shipstation-config

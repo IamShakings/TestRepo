@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-tsdb-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/atka-tsdb-consumer:release_87f146ea569b9d9282b9bc6f0bddb3d85c48d0ff_20230628235155 # {"$imagepolicy": "beta:therma-tsdb-consumer-beta"}
+          imagePullPolicy: Always

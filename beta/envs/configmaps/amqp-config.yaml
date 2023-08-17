@@ -1,0 +1,12 @@
+apiVersion: v1
+data:
+  HARDWARE_AMQP_HOST: "therma-rabbitmq.beta.svc.cluster.local."
+  HARDWARE_AMQP_USERNAME: "user"
+  HARDWARE_DEFAULT_AMQP_VHOST: "/"
+  MONITORING_AMQP_HOST: "rabbitmq.beta.svc.cluster.local"
+  MONITORING_AMQP_USERNAME: "user"
+  MONITORING_DEFAULT_AMQP_VHOST: "/"
+  MONITORING_QUEUE_MESSAGE_TTL: "60000"
+kind: ConfigMap
+metadata:
+  name: amqp-config

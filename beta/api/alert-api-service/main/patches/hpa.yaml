@@ -1,0 +1,7 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: therma-alert-api-service
+spec:
+  maxReplicas: 5
+  

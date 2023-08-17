@@ -1,0 +1,12 @@
+namespace: beta
+
+resources:
+  - ../../../../monitoring-bases/api/thermalink-api-service/main/
+  - image-automation.yaml
+  - image-policy.yaml
+
+patchesStrategicMerge:
+  - ./patches/image.yaml
+  - ./patches/env.yaml
+  - ./patches/resources.yaml
+  - ./patches/service.yaml

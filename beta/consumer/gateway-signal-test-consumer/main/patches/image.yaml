@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-gateway-signal-test-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/atka-gateway-signal-test-consumer:release_3ecde6717708f38891e587ea66d0f570c1f2b14f_20230308032100 # {"$imagepolicy": "beta:therma-gateway-signal-test-consumer-beta"}
+          imagePullPolicy: Always

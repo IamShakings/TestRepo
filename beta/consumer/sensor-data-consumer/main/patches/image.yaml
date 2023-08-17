@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-sensor-data-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/atka-sensor-data-consumer:release_0ea5cd2b93a0f761d6f15378160f724ec7b1b249_20230628233918 # {"$imagepolicy": "beta:therma-sensor-data-consumer-beta"}
+          imagePullPolicy: Always

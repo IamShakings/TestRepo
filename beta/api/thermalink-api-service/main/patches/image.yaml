@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-thermalink-api-service
+spec:
+  template:
+    spec:
+      containers:
+      - name: application
+        image: mewe/atka-thermalink-api-service:release_09628ea3b931e1c7f42470297782e43c3b88ebca_20230607185342 # {"$imagepolicy": "beta:therma-thermalink-api-service-beta"}

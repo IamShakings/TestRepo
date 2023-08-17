@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-alert-config-reminders-scheduler
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/atka-alert-config-reminders-scheduler:release_84e13bbae1ed62fd128de9cb25dbacaa12cb26a7_20221220033916 # {"$imagepolicy": "beta:therma-alert-config-reminders-scheduler-beta"}
+          imagePullPolicy: Always

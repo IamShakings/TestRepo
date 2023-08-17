@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-alert-service
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/atka-alert-service:release_2716e45a9f0a61a06c0c7aacaddf590373d99675_20230703163257 # {"$imagepolicy": "beta:therma-alert-service-beta"}
+          imagePullPolicy: Always

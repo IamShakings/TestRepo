@@ -1,0 +1,12 @@
+namespace: beta
+
+resources:
+  - ../../../../monitoring-bases/consumer/gateway-offline-consumer/
+  - ./image-policy.yaml
+  - ./image-automation.yaml
+
+patchesStrategicMerge:
+  - ./patches/image.yaml
+  - ./patches/resources.yaml
+  - ./patches/env.yaml
+  - ./patches/hpa.yaml

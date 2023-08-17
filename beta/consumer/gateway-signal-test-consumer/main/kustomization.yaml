@@ -1,0 +1,13 @@
+namespace: beta
+
+resources:
+  - ../../../../monitoring-bases/consumer/gateway-signal-test-consumer/main
+  - ./image-policy.yaml
+  - ./image-automation.yaml
+
+patchesStrategicMerge:
+  - ./patches/image.yaml
+  - ./patches/resources.yaml
+  - ./patches/env.yaml
+  - ./patches/hpa.yaml
+

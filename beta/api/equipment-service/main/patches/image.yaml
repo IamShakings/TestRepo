@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-equipment-service
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/equipment-service:release_f9ea7d362084549087623a364a1acd2121cebed7_20230619031711 # {"$imagepolicy": "beta:therma-equipment-service-beta"}
+          imagePullPolicy: Always

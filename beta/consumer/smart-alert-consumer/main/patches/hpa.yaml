@@ -1,0 +1,6 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: therma-smart-alert-consumer
+spec:
+  maxReplicas: 5

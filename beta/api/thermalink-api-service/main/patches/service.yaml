@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:354866488616:certificate/8cba0e94-423c-42e5-923b-8321c7bdd9fb
+  labels:
+    app.kubernetes.io/part-of: thermalink-beta
+  name: therma-thermalink-api-service

@@ -1,0 +1,71 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration
+spec:
+  template:
+    spec:
+      containers:
+        - name: migration
+          envFrom:
+            - configMapRef:
+                name: server-config
+            - configMapRef:
+                name: amqp-config
+            - configMapRef:
+                name: api-endpoints
+            - configMapRef:
+                name: new-relic-config
+            - configMapRef:
+                name: redis-config
+            - configMapRef:
+                name: database-config
+            - configMapRef:
+                name: twilio-config
+            - configMapRef:
+                name: influxdb-config
+            - configMapRef:
+                name: firebase-config
+            - secretRef:
+                name: api-keys
+            - secretRef:
+                name: aws-keys
+            - secretRef:
+                name: twilio-keys
+            - secretRef:
+                name: influxdb-credentials
+            - secretRef:
+                name: amqp-credentials
+            - secretRef:
+                name: database-credentials
+          env:
+            - name: CORS_ORIGIN
+              value: https://dashboard.beta.helloatka.com,https://thermaboard.beta.helloatka.com,https://thermalink.beta.helloatka.com,https://thermalink.beta.helloatka.com
+            - name: API_DB_HOST
+              value: $(MONITORING_DB_HOST)
+            - name: API_DB_NAME
+              value: $(MONITORING_DB_NAME)
+            - name: API_DB_PASSWORD
+              value: $(MONITORING_DB_PASSWORD)
+            - name: API_DB_USER
+              value: $(MONITORING_DB_USER)
+            - name: PUBLIC_URL
+              value: https://dashboard.beta.helloatka.com
+            - name: SERVER_NAME
+              value: therma-api-service-beta
+            - name: FEATURE_CALL_NOTIFICATION
+              value: "false"
+            - name: AMQP_SERVER
+              value: amqp://$(MONITORING_AMQP_USERNAME):$(MONITORING_AMQP_PASSWORD)@$(MONITORING_AMQP_HOST):5672?heartbeat=30
+            - name: LOCATION_DB_HOST
+              value: $(MONITORING_DB_HOST)
+            - name: GOOGLE_MAP_API_BASE_URL
+              value: https://maps.googleapis.com/maps/api
+            - name: NEW_RELIC_APP_NAME
+              value: Therma Beta - API Service
+            - name: QUEUE_REPORT_GENERATE
+              value: report.generate
+            - name: REDIS_URL
+              value: $(MONITORING_REDIS_URL)
+            - name: NODE_ENV
+              value: development

@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-mqtt-amqp-bridge
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/atka-mqtt-amqp-bridge:release_0e93564275670f494802dc898982f81b41a3d369_20230215054233 # {"$imagepolicy": "beta:therma-mqtt-amqp-bridge-beta"} 
+          imagePullPolicy: Always

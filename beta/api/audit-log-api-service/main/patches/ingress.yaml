@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: therma-audit-log-api-service
+spec:
+  rules:
+  - host: audit-log-api.beta.hellotherma.it
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: therma-audit-log-api-service
+              port:
+                number: 80

@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-alert-setup-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - image: mewe/atka-alert-setup-consumer:release_db44f3bb8bf14fb5dde53c49bc5416b86f2e1e64_20230717052356 # {"$imagepolicy": "beta:therma-alert-setup-consumer-beta"}
+          name: application

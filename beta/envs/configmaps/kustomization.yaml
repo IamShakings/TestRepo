@@ -1,0 +1,19 @@
+resources:
+  - ./amqp-config.yaml
+  - ./api-endpoints.yaml
+  - ./database-config.yaml
+  - ./firebase-config.yaml
+  - ./hardware-config.yaml
+  - ./influxdb-config.yaml
+  - ./new-relic-config.yaml
+  - ./redis-config.yaml
+  - ./server-config.yaml
+  - ./therma-gateway-offline-consumer-cm.yaml
+  - ./twilio-config.yaml
+  - hubspot-config.yaml
+  - lastpass-config.yaml
+  - shipstation-config.yaml
+  - slack-config.yaml
+  - stripe-config.yaml
+
+namespace: beta

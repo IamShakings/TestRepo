@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-redis-alert-trigger-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - image: mewe/atka-redis-alert-trigger-consumer:release_2828ab1eeaa91c2a66831975658adeb01b782149_20230718202843 # {"$imagepolicy": "beta:therma-redis-alert-trigger-consumer-beta"}
+          name: application

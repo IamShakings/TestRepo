@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  LASTPASS_API_BASE_URL: "http://coinspect-lastpass-api-svc.default.svc.cluster.local"
+  LASTPASS_LOGIN_URL: "https://dashboard.beta.helloatka.com/signin"
+kind: ConfigMap
+metadata:
+  name: lastpass-config

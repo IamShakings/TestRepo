@@ -1,0 +1,9 @@
+namespace: beta
+resources:
+  - ../../../../monitoring-bases/api/climate-service/main/
+  - ./image-policy.yaml
+  - ./image-automation.yaml
+patchesStrategicMerge:
+  - ./patches/image.yaml
+  - ./patches/env.yaml
+  - ./patches/resources.yaml

@@ -1,0 +1,6 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: therma-event-consumer
+spec:
+  maxReplicas: 5

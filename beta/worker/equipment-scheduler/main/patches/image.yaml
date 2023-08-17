@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-equipment-scheduler
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/atka-equipment-scheduler:release_47afed8dbf22dcb45b7a7b59a1313267bd583be5_20230517035433 # {"$imagepolicy": "beta:therma-equipment-scheduler-beta"}
+          imagePullPolicy: Always

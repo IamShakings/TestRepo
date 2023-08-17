@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-tsdb-hardware-event-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/atka-tsdb-hardware-event-consumer:release_248158efa63bb2a7714d71ff6dbe72af243eea02_20230628235009 # {"$imagepolicy": "beta:therma-tsdb-hardware-event-consumer-beta"}
+          imagePullPolicy: Always

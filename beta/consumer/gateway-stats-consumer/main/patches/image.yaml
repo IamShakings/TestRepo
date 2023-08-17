@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-gateway-stats-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/atka-gateway-stats-consumer:release_2c8e232b42c996817a7a1889c9528f8aa56cfb3f_20230628235710 # {"$imagepolicy": "beta:therma-gateway-stats-consumer-beta"}
+          imagePullPolicy: Always

@@ -1,0 +1,8 @@
+namespace: beta
+resources:
+  - ../../../../monitoring-bases/api/api-service/post-deployment/
+patchesStrategicMerge:
+  - ./patches/config.yaml
+  - ./patches/image.yaml
+
+nameSuffix: -therma-apis

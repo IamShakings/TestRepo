@@ -1,0 +1,6 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: therma-gateway-signal-test-consumer
+spec:
+  maxReplicas: 10

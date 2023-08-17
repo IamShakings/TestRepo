@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-event-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/atka-event-consumer:release_8fba02d79245f4706feaffbda8b3c0296984f616_20230628233600 # {"$imagepolicy": "beta:therma-event-consumer-beta"}
+          imagePullPolicy: Always

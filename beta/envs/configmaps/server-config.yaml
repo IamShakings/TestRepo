@@ -1,0 +1,17 @@
+apiVersion: v1
+data:
+  AWS_ACCOUNT_ID: "354866488616"
+  AWS_BUCKET: hellotherma-uploads-beta
+  AWS_QUEUE_CHANNEL: prod-hellotherma-notification-beta
+  AWS_XRAY_DAEMON_ADDRESS: xray-service.monitoring.svc.cluster.local:2000
+  LOG_LEVEL: verbose
+  MQTT_HOST: alf7n9vsgrwq-ats.iot.us-east-1.amazonaws.com
+  NODE_ENV: production
+  SQS_AWS_ACCOUNT_ID: "354866488616"
+  STAGE: development
+  NOTIFICATION_EMAIL_RECIPIENT: "engineeringleads@coinspectapp.com,ron@coinspectapp.com,huxley@coinspectapp.com,devlin@coinspectapp.com"
+  NOTIFICATION_EMAIL_SENDER: "Support <support@hellotherma.com>"
+kind: ConfigMap
+metadata:
+  name: server-config
+

@@ -1,0 +1,6 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: therma-gateway-offline-consumer
+spec:
+  maxReplicas: 5

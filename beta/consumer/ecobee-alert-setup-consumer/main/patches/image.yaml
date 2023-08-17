@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-ecobee-alert-setup-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/atka-ecobee-alert-setup-consumer:release_7352fefc05e9697e818144c01911bbcc8097ee54_20230705151255 # {"$imagepolicy": "beta:therma-ecobee-alert-setup-consumer-beta"}
+          imagePullPolicy: Always

@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: therma-device-api-service
+spec:
+  rules:
+  - host: device-api.beta.hellotherma.it
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: therma-device-api-service
+              port:
+                number: 80

@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-downlink-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/atka-downlink-consumer:release_e07b066e68c0fb0b787d208c712759c53cb8d850_20230629025833 # {"$imagepolicy": "beta:therma-downlink-consumer-beta"} 
+          imagePullPolicy: Always

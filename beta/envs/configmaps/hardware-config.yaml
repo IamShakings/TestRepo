@@ -1,0 +1,13 @@
+apiVersion: v1
+data:
+  AMQP_CONFIG_ROUTING_KEY: application.4.device.#
+  AMQP_JOIN_ROUTING_KEY: application.4.device.*.event.join
+  AMQP_UPLINK_RECEIVED_ROUTING_KEY: application.4.device.*.event.up
+  DATA_PUBLISH_TOPIC: beta/locations/gateways/devices/SERIAL_NUMBER/sensors
+  CHIRPSTACK_APPLICATION_ID: '4'
+  HARDWARE_TSDB_BUCKET: hardware-events-beta
+  HARDWARE_TSDB_CONFIG_URL: http://influxdb-hardware-events-influxdb2.beta.svc.cluster.local.
+  HARDWARE_TSDB_ORG: therma-hardware-beta
+kind: ConfigMap
+metadata:
+  name: hardware-config

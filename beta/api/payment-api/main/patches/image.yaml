@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-api
+spec:
+  template:
+    spec:
+      containers:
+      - name: application
+        image: mewe/therma-payment-api:release_04a84fce7ebb269ad213149e1fc2b14cf3e9c9d4_20230522000351 # {"$imagepolicy": "beta:therma-payment-api-beta"}

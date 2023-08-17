@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-redis-keyspace-notification-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/atka-redis-keyspace-notification-consumer:release_be4ea53c0ce2150fac6b0e31691b9d731706b3b5_20230628234633 # {"$imagepolicy": "beta:therma-redis-keyspace-notification-consumer-beta"} 
+          imagePullPolicy: Always

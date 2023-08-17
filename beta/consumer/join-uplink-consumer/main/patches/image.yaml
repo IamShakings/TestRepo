@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-join-uplink-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/atka-join-uplink-consumer:release_dadf800a86fde9779b23162435b56bf77c9cee44_20230622020043 # {"$imagepolicy": "beta:therma-join-uplink-consumer-beta"}
+          imagePullPolicy: Always

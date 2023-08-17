@@ -1,0 +1,10 @@
+namespace: beta
+  
+resources:
+  - ./image-policy.yaml
+  - ./image-automation.yaml
+  - ../../../../monitoring-bases/worker/alert-config-reminders-scheduler/main/
+patchesStrategicMerge:
+  - ./patches/image.yaml
+  - ./patches/env.yaml
+  - ./patches/resources.yaml

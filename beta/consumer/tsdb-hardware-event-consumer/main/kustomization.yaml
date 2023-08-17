@@ -1,0 +1,11 @@
+namespace: beta
+
+resources: 
+  - ../../../../monitoring-bases/consumer/tsdb-hardware-event-consumer/main/
+  - ./image-policy.yaml
+  - ./image-automation.yaml
+
+patchesStrategicMerge:
+  - ./patches/image.yaml
+  - ./patches/env.yaml
+  - ./patches/resources.yaml

@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-device-service
+spec:
+  template:
+    spec:
+      containers:
+      - name: application
+        image: mewe/atka-device-service:release_b87824f91f0a32ada9291f9d9e6ae1b5fdc66da5_20230706071308 # {"$imagepolicy": "beta:therma-device-service-beta"}

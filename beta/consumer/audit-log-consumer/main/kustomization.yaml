@@ -1,0 +1,12 @@
+namespace: beta
+
+resources:
+  - ../../../../monitoring-bases/consumer/audit-log-consumer/main/
+  - image-automation.yaml
+  - image-policy.yaml
+  
+patchesStrategicMerge:
+  - ./patches/image.yaml
+  - ./patches/env.yaml
+  - ./patches/resources.yaml
+  - ./patches/hpa.yaml

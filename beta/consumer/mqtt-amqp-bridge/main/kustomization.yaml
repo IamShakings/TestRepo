@@ -1,0 +1,11 @@
+namespace: beta
+
+resources:
+  - ../../../../monitoring-bases/consumer/mqtt-amqp-bridge/main/
+  - ./image-policy.yaml
+  - ./image-automation.yaml
+
+patchesStrategicMerge:
+  - ./patches/image.yaml
+  - ./patches/env.yaml
+  - ./patches/resources.yaml

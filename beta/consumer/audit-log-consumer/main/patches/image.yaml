@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-audit-log-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - image: mewe/atka-audit-log-consumer:release_a215fe2cec89aa64ed894e4787e3ba1698ea3edf_20230718010044 # {"$imagepolicy": "beta:therma-audit-log-consumer-beta"}
+          name: application

@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-gateway-startup-message-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/atka-gateway-startup-message-consumer:release_3113457ac52fda6eb1bdf3149e86260947ed46da_20230622025315 # {"$imagepolicy": "beta:therma-gateway-startup-message-consumer-beta"}
+          imagePullPolicy: Always

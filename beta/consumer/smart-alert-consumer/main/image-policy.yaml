@@ -1,0 +1,13 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: therma-smart-alert-consumer-beta
+spec:
+  filterTags:
+    extract: "$ts"
+    pattern: ^release_[a-f0-9]+_(?P<ts>[0-9]{14})$
+  imageRepositoryRef:
+    name: therma-smart-alert-consumer
+  policy:
+    numerical:
+      order: asc

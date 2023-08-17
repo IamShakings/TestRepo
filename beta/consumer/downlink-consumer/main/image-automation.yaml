@@ -1,0 +1,24 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageUpdateAutomation
+metadata:
+  name: therma-downlink-consumer
+spec:
+  interval: 1m
+  sourceRef:
+    kind: GitRepository
+    name: therma-flux-apps-main-with-monitoring-bases
+    namespace: flux-system
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        email: devops@hellotherma.com
+        name: fluxcdbot
+      messageTemplate: '{{range .Updated.Images}}{{println .}}{{end}}'
+    push:
+      branch: main
+  update:
+    path: ./beta/consumer/downlink-consumer
+    strategy: Setters

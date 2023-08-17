@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-climate-service
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/therma-climate-service:release_c0120830ee100df1bd30cac64d7b188d36572e2c_20230711143515 # {"$imagepolicy": "beta:therma-climate-service-beta"}
+          imagePullPolicy: Always

@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-equipment-tester-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - image: mewe/atka-equipment-tester-consumer:release_af71a9fa0516b902101520edffc8cacca46c3f3c_20230717053315 # {"$imagepolicy": "beta:therma-equipment-tester-consumer-beta"}
+          name: application

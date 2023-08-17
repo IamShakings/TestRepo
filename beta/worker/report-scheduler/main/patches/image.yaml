@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-report-scheduler
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/therma-report-scheduler:release_a215fe2cec89aa64ed894e4787e3ba1698ea3edf_20230718010044 # {"$imagepolicy": "beta:therma-report-scheduler-beta"}
+          imagePullPolicy: Always

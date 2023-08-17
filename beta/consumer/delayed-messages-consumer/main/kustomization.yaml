@@ -1,0 +1,11 @@
+namespace: beta
+
+resources:
+  - ./image-policy.yaml
+  - ./image-automation.yaml
+  - ../../../../monitoring-bases/consumer/delayed-messages-consumer/main/
+
+patchesStrategicMerge:
+  - ./patches/env.yaml
+  - ./patches/image.yaml   
+  - ./patches/resources.yaml

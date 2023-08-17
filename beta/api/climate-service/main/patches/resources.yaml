@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-climate-service
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          resources:
+            limits:
+              cpu: 600m
+              memory: 400Mi
+            requests:
+              cpu: 500m
+              memory: 300Mi

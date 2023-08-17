@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  SLACK_WEBHOOK_TBD: "https://hooks.slack.com/services/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"
+  SLACK_BASE_URL: "https://slack.com/api"
+  SLACK_CHANNEL_PORTAL_SESSION: "C02593NLLHL"
+  SLACK_CHANNEL_ECOMM_FAILS: "C0398U6AWJX"
+  SLACK_CHANNEL_ECOMM_DEALS: "C02B6L37W81"
+kind: ConfigMap
+metadata:
+  name: slack-config

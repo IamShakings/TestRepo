@@ -1,0 +1,10 @@
+namespace: beta
+bases:
+resources:
+  - ./image-policy.yaml
+  - ./image-automation.yaml
+  - ../../../../monitoring-bases/worker/equipment-scheduler/main/
+patchesStrategicMerge:
+  - ./patches/image.yaml
+  - ./patches/env.yaml
+  - ./patches/resources.yaml

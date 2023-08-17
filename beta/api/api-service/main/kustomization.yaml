@@ -1,0 +1,11 @@
+namespace: beta
+resources:
+  - ../../../../monitoring-bases/api/api-service/main/
+  - image-automation.yaml
+  - image-policy.yaml
+patchesStrategicMerge:
+  - ./patches/image.yaml
+  - ./patches/env.yaml
+  - ./patches/resources.yaml
+  - ./patches/ingress.yaml
+  - ./patches/hpa.yaml

@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  HARDWARE_REDIS_HOST: therma-redis-hardware-primary.beta.hellotherma.it
+  HARDWARE_REDIS_URL: redis://therma-redis-hardware-primary.beta.hellotherma.it:6379/2
+  MONITORING_REDIS_URL: redis://therma-beta-redis.zeprgi.ng.0001.use1.cache.amazonaws.com:6379/2
+  REDIS_KEYSPACE_NOTIFICATION_CONSUMER_HOST: "therma-redis-hardware-primary.beta.hellotherma.it"
+  REDIS_EXPIRATION: "300"
+kind: ConfigMap
+metadata:
+  name: redis-config

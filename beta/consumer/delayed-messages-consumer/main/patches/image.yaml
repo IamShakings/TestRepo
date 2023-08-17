@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-delayed-messages-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - image: mewe/atka-delayed-messages-consumer:release_cbcac174ec6db0069f82dd1bf0446f4deb01d3fb_20230627050647 # {"$imagepolicy": "beta:therma-delayed-messages-consumer-beta"}
+          name: application

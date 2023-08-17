@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-gateway-offline-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/atka-gateway-offline-consumer:release_db526932e79da9020a7d59d2abbdae1d3ec2739b_20230522000905 # {"$imagepolicy": "beta:therma-gateway-offline-consumer-beta"}
+          imagePullPolicy: Always
