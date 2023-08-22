@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-account-api-service
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/atka-account-api-service:develop_12e020b85fa22804b99bc495c958ee825f527273_20230728192515 # {"$imagepolicy": "qa:therma-account-api-service-qa"}
+          imagePullPolicy: Always

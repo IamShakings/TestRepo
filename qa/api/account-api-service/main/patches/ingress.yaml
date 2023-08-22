@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: therma-account-api-service
+spec:
+  rules:
+  - host: account-api.qa.hellotherma.it
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: therma-account-api-service
+              port:
+                number: 80
