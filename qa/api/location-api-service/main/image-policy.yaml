@@ -1,0 +1,13 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: therma-location-api-service-qa
+spec:
+  filterTags:
+    extract: "$ts"
+    pattern: ^develop_[a-f0-9]+_(?P<ts>[0-9]{14})$
+  imageRepositoryRef:
+    name: therma-location-api-service
+  policy:
+    numerical:
+      order: asc

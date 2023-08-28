@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-location-api-service
+spec:
+  template:
+    spec:
+      containers:
+      - name: application
+        image: mewe/atka-location-api-service:develop_6272f8f6c9e213b047e357f7c8e26d3174d706a8_20230703163940 # {"$imagepolicy": "qa:therma-location-api-service-qa"}
