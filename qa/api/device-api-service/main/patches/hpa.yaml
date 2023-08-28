@@ -3,4 +3,4 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: therma-device-api-service
 spec:
-  maxReplicas: 6
+  maxReplicas: 7
