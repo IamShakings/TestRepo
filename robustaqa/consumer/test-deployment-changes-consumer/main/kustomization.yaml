@@ -1,0 +1,7 @@
+namespace: qa
+
+resources:
+  - ../../../../monitoring-bases/consumer/test-deployment-changes-consumer/main/
+
+patchesStrategicMerge:
+  - ./patches/hpa.yaml
