@@ -1,0 +1,12 @@
+namespace: qa
+
+resources:
+  - ./image-policy.yaml
+  - ./image-automation.yaml
+  - ../../../../monitoring-bases/consumer/event-consumer/main/
+
+patchesStrategicMerge:
+  - ./patches/image.yaml
+  - ./patches/resources.yaml
+  - ./patches/env.yaml
+  - ./patches/hpa.yaml
