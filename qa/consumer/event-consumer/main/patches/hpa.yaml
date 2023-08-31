@@ -1,10 +1,10 @@
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: therma-event-consumer
-  labels: 
-    dir: "therma-flux-apps"
   annotations:
-    hpa-overlay-full-path: "qa/consumer/event-consumer/main/patches"
+    hpa-overlay-full-path: qa/consumer/event-consumer/main/patches
+  labels:
+    dir: therma-flux-apps
+  name: therma-event-consumer
 spec:
-  maxReplicas: 5
+  maxReplicas: 6
