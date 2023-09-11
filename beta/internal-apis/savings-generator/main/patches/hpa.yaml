@@ -1,11 +1,10 @@
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: savings-generator
-  labels: 
-    dir: "therma-energy-flux-apps"
   annotations:
-    hpa-overlay-full-path: "beta/internal-apis/savings-generator/main/patches"
+    hpa-overlay-full-path: beta/internal-apis/savings-generator/main/patches
+  labels:
+    dir: therma-energy-flux-apps
+  name: savings-generator
 spec:
-  maxReplicas: 5
-  
+  maxReplicas: 6
