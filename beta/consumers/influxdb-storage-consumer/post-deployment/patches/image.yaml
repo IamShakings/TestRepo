@@ -1,0 +1,10 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration
+spec:
+  template:
+    spec:
+      containers:
+      - name: migration
+        image: mewe/influxdb-storage-consumer:release_97f897477ddf122b426176a25ab0f3ad7748c2e3_20230511210943 # {"$imagepolicy": "beta:influxdb-storage-consumer"}  

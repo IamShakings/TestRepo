@@ -1,0 +1,11 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: therma-energy-apis
+  labels: 
+    dir: "therma-energy-flux-apps"
+  annotations:
+    hpa-overlay-full-path: "beta/internal-apis/therma-energy-apis/main/patches"
+spec:
+  maxReplicas: 5
+  

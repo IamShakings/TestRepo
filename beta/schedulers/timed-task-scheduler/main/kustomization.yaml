@@ -1,0 +1,5 @@
+namespace: beta
+resources:
+  -  ../../../../energy-bases/schedulers/timed-task-scheduler/main/
+patchesStrategicMerge:
+  - ./patches/resources.yaml

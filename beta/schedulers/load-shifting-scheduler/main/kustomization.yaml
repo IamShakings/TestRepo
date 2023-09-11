@@ -1,0 +1,8 @@
+namespace: beta
+resources:
+  - ./image-policy.yaml
+  - ./image-automation.yaml
+  -  ../../../../energy-bases/schedulers/load-shifting-scheduler/main
+patchesStrategicMerge:
+  - ./patches/resources.yaml
+  - ./patches/image.yaml

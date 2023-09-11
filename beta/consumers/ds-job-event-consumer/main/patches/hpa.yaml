@@ -1,0 +1,10 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: ds-job-event-consumer
+  labels: 
+    dir: "therma-energy-flux-apps"
+  annotations:
+    hpa-overlay-full-path: "beta/consumers/ds-job-event-consumer/main/patches"
+spec:
+  maxReplicas: 5

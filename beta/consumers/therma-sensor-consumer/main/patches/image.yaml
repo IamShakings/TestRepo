@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-sensor-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/therma-sensor-consumer:release_da68ba511c7b91d5d293b7f0305e0f38d34dec48_20230727200236 # {"$imagepolicy": "beta:therma-sensor-consumer"} 

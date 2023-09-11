@@ -1,0 +1,18 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: therma-energy-load-shifting-scheduler
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: therma-energy-load-shifting-scheduler
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 200Mi
+                limits:
+                  cpu: 300m
+                  memory: 400Mi

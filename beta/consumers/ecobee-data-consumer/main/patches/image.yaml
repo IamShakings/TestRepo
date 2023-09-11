@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecobee-data-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/therma-energy-ecobee-data-consumer:release_58532559d1026460866ec0cfa6c99b675723f4cb_20230705162650 # {"$imagepolicy": "beta:ecobee-data-consumer"} 

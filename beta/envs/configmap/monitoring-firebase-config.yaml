@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  THERMALINK_FIREBASE_CERT_URL: https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-hydam%40thermalink-staging.iam.gserviceaccount.com #map to FIREBASE_CERT_URL in Energy deployments
+  THERMALINK_FIREBASE_CLIENT_EMAIL: firebase-adminsdk-hydam@thermalink-staging.iam.gserviceaccount.com #map to FIREBASE_CLIENT_EMAIL in Energy deployments
+  THERMALINK_FIREBASE_CLIENT_ID: "105319001910408803898" #map to FIREBASE_CLIENT_ID in Energy deployments
+  THERMALINK_FIREBASE_PROJECT_ID: thermalink-staging #map to FIREBASE_PROJECT_ID in Energy deployments
+kind: ConfigMap
+metadata:
+  name: monitoring-firebase-config

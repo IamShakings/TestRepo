@@ -1,0 +1,6 @@
+namespace: beta
+resources:
+  - ../../../../energy-bases/consumers/tots-data-consumer/post-deployment
+patchesStrategicMerge:
+  - ./patches/image.yaml
+nameSuffix: -tots-data-consumer

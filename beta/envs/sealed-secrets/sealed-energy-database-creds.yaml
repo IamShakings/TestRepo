@@ -1,0 +1,15 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: energy-database-credentials
+  namespace: beta
+spec:
+  encryptedData:
+    ENERGY_API_DB_PASSWORD: AgA3aWdQQeDj/sZjvTYLP67OO0llPrr1XWd5oyD1RrBwmCdQrTIe4A7Oah9tGBLqeXq2ke321189OoUy+LjdDYnLr30cl7BtVr3zHegHIkwb6Ms1Czu8nxdLwYqKG4CvrDW1GEonIb0ZlYSNzmw5f8BQuqI6qlVftOUIt7pL4S5A/aYsyRhydU3uVqe3wrvmMCYvk71l4mbOljlb63iXPnUcp9bP9Lw+JntLPxM7rtaSGrXa7pkr2UJztP4VwliIuhCm04h3C4mAcq6QZsuMx5lRnD9gKKxe5hCQ+JZSqNw16VqTr42kYlslJhc3be7XTnxi/H1RO9hmaSwT8CFQdqXKTk0l4uZsLzbItaY79Uf2bDI032a+lmNMB+gdEODQxrG8uwVkhbh8ts0JMUK0uMwDCHkyketrHjRNuCXMpIioTEdp2GF7O870SvqYqN88z+cIRfRV7ObJjy3bURU/0eiugjOQh665V83CJco3tV3mWxLKixG2AqmcZ0H7NwegK4lv8AZUJpF1eX2C2QwXxpJILqM6a5zl8c3PpPyt8AwytNPLB9RBsBdDk/XIl228oTp8DJecuf2Y2zOAif2wjHPpHen+yybqM7Z3/AKayoRHL99H/aIET5C4a4YLJSyn47vuyyoblGxUy7bG3DqnvUBhRafdAQElU4jLqBWRTxGutKSgP4ctV6Z5fBuvRqFNK8A8f/XaFwxE4F0R01bcVRzgdTG9xoucmj84r4L4
+  template:
+    data: null
+    metadata:
+      creationTimestamp: null
+      name: energy-database-credentials
+      namespace: beta

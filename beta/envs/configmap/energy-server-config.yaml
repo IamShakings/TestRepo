@@ -1,0 +1,17 @@
+apiVersion: v1
+data:
+  ML_LOOKUP_STORE_BUCKET: ml-lookup-store-stg
+  BILL_PDF_FILE_BUCKET: bill-pdf-store-stg
+  LOG_LEVEL: debug
+  STAGE: staging
+  REFRIGERATION_CONTROL_ENABLED: "true"
+  ECOBEE_OCCUPIED_HOLD_TEMPERATURE_DELTA: "2"
+  ECOBEE_UNOCCUPIED_HOLD_TEMPERATURE_DELTA: "5"
+  PREDICTION_LOOKUP_MAX_PS_MINUTES: "75"
+  AWS_DEFAULT_REGION: us-east-1
+  ML_ONLINE_FEATURE_STORE_BUCKET: ml-online-feature-store-stg
+  DAILY_UTILITY_CUSTOMER_INTERVAL_DATA_DAYS: "14"
+  TASK_STAGGER_DELTA_MIN: "5"
+kind: ConfigMap
+metadata:
+  name: energy-server-config

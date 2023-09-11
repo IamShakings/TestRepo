@@ -1,0 +1,10 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration
+spec:
+  template:
+    spec:
+      containers:
+        - name: migration
+          image: mewe/therma-energy-tots-qos-consumer:release_826183cce1ddb0b8c4f55570672bd6321ace9e85_20230112021914 # {"$imagepolicy": "beta:tots-qos-consumer"}

@@ -1,0 +1,53 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration
+spec:
+  template:
+    spec:
+      containers:
+      - name: migration
+        env:
+          - name: SAVINGS_GENERATOR_API
+            value: $(SAVINGS_GENERATOR_API_URL)
+          - name: MONITORING_LOCATION_API
+            value: $(LOCATION_API)
+          - name: AWS_DR_DAYAHEAD_FILE_BUCKET
+            value: $(ML_LOOKUP_STORE_BUCKET)
+          - name: AWS_PEAKSHAVING_FILE_BUCKET
+            value: $(ML_LOOKUP_STORE_BUCKET)
+          - name: AWS_BILL_PDF_FILE_BUCKET
+            value: $(BILL_PDF_FILE_BUCKET)
+          - name: MONITORING_COMPANY_API
+            value: $(ACCOUNT_API)
+          - name: AMQP_HOST
+            value: $(HARDWARE_AMQP_HOST)
+          - name: AMQP_USERNAME
+            value: $(HARDWARE_AMQP_USERNAME)
+          - name: AMQP_PASSWORD
+            value: $(HARDWARE_AMQP_PASSWORD)
+        envFrom:
+          - configMapRef:
+              name: energy-api-endpoints
+          - configMapRef:
+              name: energy-server-config
+          - secretRef:
+              name: monitoring-amqp-credentials
+          - secretRef:
+              name: energy-influxdb-credentials
+          - secretRef:
+              name:  energy-api-keys
+          - secretRef:
+              name:  energy-aws-keys
+          - secretRef:
+              name: energy-database-credentials
+          - configMapRef:
+              name: monitoring-api-endpoints
+          - configMapRef:
+              name: energy-redis-config
+          - configMapRef:
+              name: energy-database-config
+          - configMapRef:
+              name: energy-influxdb-config
+          - configMapRef:
+              name: monitoring-amqp-config

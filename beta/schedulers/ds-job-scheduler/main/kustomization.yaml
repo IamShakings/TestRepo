@@ -1,0 +1,6 @@
+namespace: beta
+resources:
+  -  ../../../../energy-bases/schedulers/ds-job-scheduler/main/
+patchesStrategicMerge:
+   - ./patches/resources.yaml
+   - ./patches/image.yaml

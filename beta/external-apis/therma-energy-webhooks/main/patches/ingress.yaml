@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: therma-energy-webhooks
+spec:
+  rules:
+    - host: energy-webhooks.beta.helloatka.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: therma-energy-webhooks
+                port:
+                  number: 80

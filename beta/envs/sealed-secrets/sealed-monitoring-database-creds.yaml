@@ -1,0 +1,16 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: monitoring-database-credentials
+  namespace: beta
+spec:
+  encryptedData:
+    MONITORING_DB_PASSWORD: AgB43jo9APfM1x9ekwZO1wnUnQ86xibSwUqXpuEL3HtfbXcfRO9hH09tn2z24PM0IDMo9O6BkwYCRVNjXsC2VWr9VqjpLBr994K4ujDmzEdPj8qehzJHUVtDpcJ2MhVnE1PacxzLyMHnyXK9j5yYuB5ZeFLydZL470I87Jrkg8c1eP4c3+mcitAheaFiWIXJI3bxCoBx4Nvk9pOwwT+6uvcLrXpwaBPDD4P8NlnEtJUoDyPZyNBzJfuzi8nFHqngqKrpDckvKYwWvs9WlFOZttl+KB/8t9qwTN0EhybtQzI5Me+eblEAzKkFKfHz0W0NRMKEZ3uByuFKk990O1b1v1PQ+BnsCWoOHHm0WjiImIIorpQMM1srfOOm6dFXyTqEDQGwrbygbe48PUIxrT395bQUkHfguGWT0nAPNWqxhD8WSZ8peWi0OD23SowsChbDvG6vT8BTvQJ9lm2Eww8Zb6WTa1rnPNrE8B2avCSKdsU9SoWXOOheKWjaWMFsL1feIAtQump3NUoRyUgSB6RY/CyLERNEKGxS2JAeMSJRpqY9o/KXpDkOPY/ZfhPG3J2ODXZkcWHL+MQKfkZ/rBiCGkIvx7maOB4rvzGMyoiFXyhV2uWxJlsPmpRTvmVK3A/Rzy4V5DPWXepTw5KSiiqtCl3koIgm58Opmyw5hhIyBN/X8+WC5oMOQiGn1VOvtxgIN/iOGr9p+fDH0j6k3Sk+hudU+6faH0gJAHCD
+  template:
+    data: null
+    metadata:
+      creationTimestamp: null
+      name: monitoring-database-credentials
+      namespace: beta
+

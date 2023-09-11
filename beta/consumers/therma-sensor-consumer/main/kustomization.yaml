@@ -1,0 +1,9 @@
+namespace: beta
+resources:
+  - ./image-policy.yaml
+  - ./image-automation.yaml
+  - ../../../../energy-bases/consumers/therma-sensor-consumer/main
+patchesStrategicMerge:
+  - ./patches/resources.yaml
+  - ./patches/image.yaml
+  - ./patches/hpa.yaml

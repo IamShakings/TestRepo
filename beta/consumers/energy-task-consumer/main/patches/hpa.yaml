@@ -1,0 +1,10 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: energy-task-consumer
+  labels: 
+    dir: "therma-energy-flux-apps"
+  annotations:
+    hpa-overlay-full-path: "beta/consumers/energy-task-consumer/main/patches"
+spec:
+  maxReplicas: 5

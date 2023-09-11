@@ -1,0 +1,14 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: ds-job-event-consumer
+spec:
+  filterTags:
+    extract: "$ts"
+    pattern: ^release_[a-f0-9]+_(?P<ts>[0-9]{14})$
+  imageRepositoryRef:
+    name: ds-job-event-consumer
+  policy:
+    numerical:
+      order: asc

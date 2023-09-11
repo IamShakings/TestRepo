@@ -1,0 +1,11 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: demand-response-consumer
+  labels: 
+    dir: "therma-energy-flux-apps"
+  annotations:
+    hpa-overlay-full-path: "beta/consumers/demand-response-consumer/main/patches"
+spec:
+  maxReplicas: 5
+  

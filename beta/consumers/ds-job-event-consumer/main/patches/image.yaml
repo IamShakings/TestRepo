@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ds-job-event-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/therma-ds-job-event-consumer:release_59813ed8c4c4d002e95fbcfd795848fe0c45cfb1_20230807014700 # {"$imagepolicy": "beta:ds-job-event-consumer"} 

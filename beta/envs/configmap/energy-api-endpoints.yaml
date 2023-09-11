@@ -1,0 +1,17 @@
+apiVersion: v1
+data:
+  APIS_AGGREGATOR: http://energy-apis-service.beta.svc.cluster.local/leap
+  APIS_CONTROL: http://energy-apis-service.beta.svc.cluster.local/control
+  APIS_DEVICE: http://energy-apis-service.beta.svc.cluster.local/device
+  APIS_PREDICTION_LOOKUP: http://energy-apis-service.beta.svc.cluster.local/prediction-lookup
+  APIS_TASK: http://energy-apis-service.beta.svc.cluster.local/task
+  APIS_DATA_RETRIEVAL_WEATHER: http://energy-apis-service.beta.svc.cluster/weather
+  APIS_DATA_RETRIEVAL_UTILITY: http://energy-apis-service.beta.svc.cluster/utility-api
+  ENERGY_API_GATEWAY_URL: https://energy-gateway.beta.helloatka.com
+  SAVINGS_GENERATOR_API_URL: http://savings-generator-service.beta.svc.cluster.local 
+  THERMA_ENERGY_APIS: http://energy-apis-service.beta.svc.cluster.local
+  APIS_ENERGY_LOCATIONS: http://energy-apis-service.beta.svc.cluster.local/energy-locations
+  APIS_TIME_OF_USE: http://energy-apis-service.beta.svc.cluster.local/time-of-use
+kind: ConfigMap
+metadata:
+  name: energy-api-endpoints

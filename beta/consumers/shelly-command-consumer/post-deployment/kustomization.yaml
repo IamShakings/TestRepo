@@ -1,0 +1,7 @@
+namespace: beta
+resources:
+  - ../../../../energy-bases/consumers/shelly-command-consumer/post-deployment
+patchesStrategicMerge:
+  - ./patches/image.yaml
+nameSuffix: -shelly-command-consumer
+

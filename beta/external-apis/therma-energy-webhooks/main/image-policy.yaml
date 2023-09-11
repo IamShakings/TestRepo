@@ -1,0 +1,16 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: therma-energy-webhooks
+  namespace: flux-system
+spec:
+  filterTags:
+    extract: "$ts"
+    pattern: ^release_[a-f0-9]+_(?P<ts>[0-9]{14})$
+  imageRepositoryRef:
+    name: therma-energy-webhooks
+  policy:
+    numerical:
+      order: asc
+

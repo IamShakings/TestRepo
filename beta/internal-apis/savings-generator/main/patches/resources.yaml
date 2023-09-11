@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: savings-generator
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          resources:
+            limits:
+              cpu: 600m
+              memory: 600Mi
+            requests:
+              cpu: 500m #Max 252m over 7 days
+              memory: 600Mi #Max 285Mi over 7 days

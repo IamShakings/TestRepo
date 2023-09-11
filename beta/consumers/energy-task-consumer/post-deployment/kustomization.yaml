@@ -1,0 +1,6 @@
+namespace: beta
+resources:
+  - ../../../../energy-bases/consumers/energy-task-consumer/post-deployment
+patchesStrategicMerge:
+  - ./patches/image.yaml
+nameSuffix: -energy-task-consumer

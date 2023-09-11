@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-energy-apis-auth
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/therma-energy-apis-auth:release_c452f7c7c6675506333f9cb8a3c0535a44aa145d_20230111180636 # {"$imagepolicy": "beta:therma-energy-apis-auth"}

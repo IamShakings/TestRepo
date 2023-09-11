@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  MONITORING_DB_NAME: therma_stg #TODO map to MONITORING_DB_DATABASE in Energy deployments
+  MONITORING_DB_HOST_READ: rds-reader.staging.monitoring.internal  #TODO map to MONITORING_DB_HOST in Energy deployments
+  MONITORING_DB_USER: therma_stg_admin
+kind: ConfigMap
+metadata:
+  name: monitoring-database-config

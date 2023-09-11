@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  ENERGY_INFLUXDB_HOST: energy-influxdb-sensor-data.beta.svc.cluster.local.
+  ENERGY_INFLUXDB_NAME: therma_energy_stg
+  ENERGY_INFLUXDB_USER: therma_energy_stg_admin
+kind: ConfigMap
+metadata:
+  name: energy-influxdb-config

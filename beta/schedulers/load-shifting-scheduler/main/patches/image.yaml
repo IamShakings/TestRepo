@@ -1,0 +1,12 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: therma-energy-load-shifting-scheduler
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: therma-energy-load-shifting-scheduler
+              image: mewe/therma-energy-load-shifting-scheduler:release_0a6b6dc7ad823ec29e9f18659b721def17efb4ef_20230731231927 # {"$imagepolicy": "beta:therma-energy-load-shifting-scheduler"}

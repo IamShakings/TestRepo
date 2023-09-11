@@ -1,0 +1,6 @@
+namespace: beta
+resources:
+  - ../../../../energy-bases/consumers/tots-qos-consumer/post-deployment
+patchesStrategicMerge:
+  - ./patches/image.yaml
+nameSuffix: -tots-qos-consumer

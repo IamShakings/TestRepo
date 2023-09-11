@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  AMQP_QUEUE_INFLUXDB: energy_influxdb_storage
+  AMQP_QUEUE_ECOBEE_DATA: energy_ecobee_data
+  HARDWARE_AMQP_HOST: therma-rabbitmq.beta.svc.cluster.local #map to AMQP_HOST in Energy deployments
+  HARDWARE_AMQP_USERNAME: user #map to AMQP_USERNAME in Energy deployments
+kind: ConfigMap
+metadata:
+  name: monitoring-amqp-config

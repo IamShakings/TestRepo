@@ -1,0 +1,10 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: sensor-monitoring-consumer
+  labels: 
+    dir: "therma-energy-flux-apps"
+  annotations:
+    hpa-overlay-full-path: "beta/consumers/sensor-monitoring-consumer/main/patches"
+spec:
+  maxReplicas: 5

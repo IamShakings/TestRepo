@@ -1,0 +1,10 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration
+spec:
+  template:
+    spec:
+      containers:
+      - name: migration
+        image: mewe/therma-energy-task-consumer:release_7a31576cfa3d1b90116c1409c02a74720c29ff6b_20230727194709 # {"$imagepolicy": "beta:energy-task-consumer"} 

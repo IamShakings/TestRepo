@@ -1,0 +1,10 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: influxdb-storage-consumer
+  labels: 
+    dir: "therma-energy-flux-apps"
+  annotations:
+    hpa-overlay-full-path: "beta/consumers/influxdb-storage-consumer/main/patches"
+spec:
+  maxReplicas: 5

@@ -1,0 +1,5 @@
+namespace: beta
+resources:
+  -  ../../../../energy-bases/schedulers/daily-weather-data-scheduler/main
+patchesStrategicMerge:
+  - ./patches/resources.yaml

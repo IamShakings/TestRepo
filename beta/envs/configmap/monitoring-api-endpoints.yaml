@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  API_SERVICE: http://therma-api-service.beta.svc.cluster.local
+  DEVICE_API:  http://therma-device-api-service.beta.svc.cluster.local
+  LOCATION_API: http://therma-location-api-service.beta.svc.cluster.local
+  PROMETHEUS_ENDPOINT: http://prometheus-operated.monitoring.svc.cluster.local:9090/api/v1
+  ACCOUNT_API: http://therma-account-api-service.beta.svc.cluster.local
+  CHIRPSTACK_ENDPOINT: https://chirpstack.stg.helloatka.com/api
+kind: ConfigMap
+metadata:
+  name: monitoring-api-endpoints

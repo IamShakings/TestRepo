@@ -1,0 +1,13 @@
+resources:
+  - energy-server-config.yaml
+  - energy-api-endpoints.yaml
+  - energy-database-config.yaml
+  - energy-influxdb-config.yaml
+  - energy-redis-config.yaml
+  - monitoring-amqp-config.yaml
+  - monitoring-api-endpoints.yaml
+  - monitoring-database-config.yaml
+  - monitoring-new-relic-config.yaml
+  - monitoring-firebase-config.yaml
+
+namespace: beta

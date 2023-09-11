@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therma-energy-webhooks
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/therma-energy-webhooks:release_16eec5e703f1d4c81089c02d946221e7205aa83e_20230519121658 # {"$imagepolicy": "beta:therma-energy-webhooks"} 

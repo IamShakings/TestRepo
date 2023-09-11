@@ -1,0 +1,10 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration
+spec:
+  template:
+    spec:
+      containers:
+        - name: migration
+          image: mewe/therma-energy-tots-command-consumer:release_41ac017cdbd457ecb15c9695d571048d72528e0d_20230111175218 # {"$imagepolicy": "beta:tots-command-consumer"}

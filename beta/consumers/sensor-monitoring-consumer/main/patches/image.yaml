@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sensor-monitoring-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/therma-energy-sensor-monitoring-consumer:release_7692aa1e3bded137f4f421be6b509d841a4abd13_20230309210740 # {"$imagepolicy": "beta:sensor-monitoring-consumer"} 

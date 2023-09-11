@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tots-command-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/therma-energy-tots-command-consumer:release_41ac017cdbd457ecb15c9695d571048d72528e0d_20230111175218 # {"$imagepolicy": "beta:tots-command-consumer"}
+          resources:
+            limits:
+              cpu: 500m
+              memory: 500Mi
+            requests:
+              cpu: 300m
+              memory: 500Mi

@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  REDIS_HOST: redis.staging.energy.internal
+  REDIS_PORT: "6379"
+  REDIS_KEY_EXPIRY_MIN: "30"
+kind: ConfigMap
+metadata:
+  name: energy-redis-config

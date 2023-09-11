@@ -1,0 +1,12 @@
+resources:
+  - sealed-monitoring-amqp-credentials.yaml
+  - sealed-energy-aws-keys.yaml
+  - sealed-energy-influxdb-credentials.yaml
+  - sealed-energy-database-creds.yaml
+  - sealed-energy-api-keys.yaml
+  - sealed-monitoring-firebase-keys.yaml
+  - sealed-monitoring-database-creds.yaml
+  - sealed-monitoring-api-keys.yaml
+  - sealed-leap-credentials.yaml
+
+namespace: beta

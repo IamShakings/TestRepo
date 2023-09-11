@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tots-data-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/therma-energy-tots-data-consumer:release_32171edf8a1490cc4e3c6276c3c58fd26fd0c507_20230113150333 # {"$imagepolicy": "beta:tots-data-consumer"}

@@ -1,0 +1,10 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration
+spec:
+  template:
+    spec:
+      containers:
+      - name: migration
+        image: mewe/therma-energy-ecobee-command-consumer:release_0b851b9553ca1a3deab73d74506eab4f63ca1db9_20230815214723 # {"$imagepolicy": "beta:ecobee-command-consumer"} 

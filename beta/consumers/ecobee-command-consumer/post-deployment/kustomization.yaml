@@ -1,0 +1,7 @@
+namespace: beta
+resources:
+  - ../../../../energy-bases/consumers/ecobee-command-consumer/post-deployment
+patchesStrategicMerge:
+  - ./patches/image.yaml
+nameSuffix: -ecobee-command-consumer
+

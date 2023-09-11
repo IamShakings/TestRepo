@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demand-response-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/demand-response-consumer:release_6249b5bb21eb86d6f4b3b29dea3f61be48ffe5aa_20230424150255 # {"$imagepolicy": "beta:demand-response-consumer"} 

@@ -1,0 +1,7 @@
+namespace: beta
+resources:
+  - ../../../../energy-bases/consumers/influxdb-storage-consumer/post-deployment
+patchesStrategicMerge:
+  - ./patches/image.yaml
+nameSuffix: -influxdb-storage-consumer
+

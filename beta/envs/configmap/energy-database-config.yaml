@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  ENERGY_API_DB_HOST: rds.staging.energy.internal
+  ENERGY_API_DB_NAME: therma_energy_stg
+  ENERGY_API_DB_PORT: "5432"
+  ENERGY_API_DB_USER: "therma_energy_stg_admin"
+kind: ConfigMap
+metadata:
+  name: energy-database-config

@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shelly-command-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/therma-energy-shelly-command-consumer:release_9ae3076e604aa48185cdc1cf3d36cb95253fd922_20230421194840 # {"$imagepolicy": "beta:shelly-command-consumer"} 

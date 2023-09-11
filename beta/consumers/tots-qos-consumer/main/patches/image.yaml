@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tots-qos-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - name: application
+          image: mewe/therma-energy-tots-qos-consumer:release_826183cce1ddb0b8c4f55570672bd6321ace9e85_20230112021914 # {"$imagepolicy": "beta:tots-qos-consumer"}
